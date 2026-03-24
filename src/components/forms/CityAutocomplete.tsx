@@ -26,7 +26,7 @@ export function CityAutocomplete({ onSelect, defaultValue }: CityAutocompletePro
     const [isGeolocating, setIsGeolocating] = useState(false);
     const [selectedCity, setSelectedCity] = useState<CityResult | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+    const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // Close dropdown on outside click
     useEffect(() => {
