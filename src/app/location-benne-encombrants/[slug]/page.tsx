@@ -1,5 +1,7 @@
+export const dynamic = 'force-dynamic';
+
 import { notFound } from "next/navigation";
-import { getCityFromSlug, getAllCitySlugs } from "@/lib/seo-utils";
+import { getCityFromSlug } from "@/lib/seo-utils";
 import { getNearbyCities } from "@/lib/cities";
 import { generateEncombrantsContent } from "@/lib/content-engine";
 import Link from "next/link";
@@ -14,10 +16,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { WasteTypeCrossLinks } from "@/components/pseo/WasteTypeCrossLinks";
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-    return getAllCitySlugs().map(slug => ({ slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;

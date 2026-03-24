@@ -1,5 +1,7 @@
+export const dynamic = 'force-dynamic';
+
 import { notFound } from "next/navigation";
-import { getCityFromSlug, generateCityMetadata, getAllCitySlugs } from "@/lib/seo-utils";
+import { getCityFromSlug, generateCityMetadata } from "@/lib/seo-utils";
 import { getNearbyCities } from "@/lib/cities";
 import { generateGenericContent } from "@/lib/content-engine";
 import Link from "next/link";
@@ -13,10 +15,6 @@ import { MapPin, ArrowRight, Lightbulb, Info, Euro, Clock, Recycle, Shield, Book
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-    return getAllCitySlugs().map(slug => ({ slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
