@@ -1,6 +1,6 @@
 import { getCitiesByDepartment, getAllDepartmentCodes } from '@/lib/seo-utils';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 export async function GET(
     _request: Request,
