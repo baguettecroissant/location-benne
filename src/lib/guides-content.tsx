@@ -451,4 +451,136 @@ En cas de récidive, les montants peuvent être multipliés. La DREAL (Direction
 </>
 ),
 
+// ═══════════════════════════════════════════════════════════════
+// ARTICLE 7 — LOCATION DE BENNE POUR DÉMÉNAGEMENT
+// ═══════════════════════════════════════════════════════════════
+"location-benne-demenagement": (
+<>
+<p>Un déménagement ne se résume pas à remplir des cartons et louer un camion. Entre les vieux meubles irrécupérables, la moquette arrachée, le canapé trop usé pour être donné et les gravats d&apos;une cloison abattue, <strong>un déménagement génère en moyenne 3 à 20m³ de déchets</strong>. La location d&apos;une benne est souvent la solution la plus simple et la plus économique pour tout évacuer en une seule fois.</p>
+
+<h2>Pourquoi louer une benne pour un déménagement ?</h2>
+<p>La plupart des personnes qui déménagent sous-estiment le volume de déchets à évacuer. Résultat : des allers-retours en déchetterie qui s&apos;accumulent, un utilitaire loué à la journée qui coûte cher, et un stress supplémentaire un jour déjà éprouvant. La benne change la donne :</p>
+<ul>
+<li><strong>Gain de temps considérable</strong> : la benne est livrée devant votre domicile 24 à 48h avant le jour J. Vous la remplissez à votre rythme pendant 7 jours.</li>
+<li><strong>Zéro aller-retour en déchetterie</strong> : fini les 4-5 trajets en voiture chargée. Le loueur récupère la benne pleine et gère le traitement.</li>
+<li><strong>Traçabilité légale</strong> : vous recevez un Bordereau de Suivi des Déchets (BSD), obligatoire depuis la <strong>loi AGEC (2020)</strong>.</li>
+<li><strong>Économie réelle</strong> : à partir de 2m³ de déchets, la benne est plus rentable que les solutions alternatives (utilitaire + essence + déchetterie).</li>
+</ul>
+
+<Callout type="tip" title="💡 Le bon timing pour commander">
+<p>Commandez votre benne <strong>au moins 5 jours avant le déménagement</strong>. Cela vous laisse le temps de trier et charger progressivement, sans pression le jour J. Si la benne est posée sur la voie publique, prévoyez un délai supplémentaire pour l&apos;<IL href="/guides/autorisation-voirie-benne-guide">autorisation de voirie</IL> (5 à 15 jours selon la commune).</p>
+</Callout>
+
+<h2>Quelle taille de benne choisir pour un déménagement ?</h2>
+<p>Le volume de déchets dépend du type de logement, de la durée d&apos;occupation (plus on accumule, plus on jette) et du type de déménagement (simple départ vs. rénovation avant relocation). Voici des repères concrets :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-4 py-3 text-left font-bold">Situation</th><th className="px-4 py-3 text-center font-bold">Volume estimé</th><th className="px-4 py-3 text-center font-bold">Benne conseillée</th><th className="px-4 py-3 text-center font-bold">Budget TTC</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3">Studio / T1 — petits encombrants</td><td className="px-4 py-3 text-center">1 à 3m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">3m³</td><td className="px-4 py-3 text-center">149 – 179€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">T2-T3 — meubles + cartons</td><td className="px-4 py-3 text-center">3 à 6m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">6m³</td><td className="px-4 py-3 text-center">199 – 279€</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Maison 4-5 pièces — gros tri</td><td className="px-4 py-3 text-center">6 à 15m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">10 ou 15m³</td><td className="px-4 py-3 text-center">299 – 369€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Succession / vidage complet</td><td className="px-4 py-3 text-center">15 à 30m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">20 ou 30m³</td><td className="px-4 py-3 text-center">449 – 599€</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Déménagement + rénovation légère</td><td className="px-4 py-3 text-center">5 à 10m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">10m³</td><td className="px-4 py-3 text-center">299 – 399€</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Pour une estimation plus fine selon votre projet, consultez notre <IL href="/guides/comment-choisir-taille-benne">guide complet des tailles de bennes</IL>. La règle d&apos;or reste la même : <strong>prenez toujours la taille au-dessus</strong>. L&apos;écart de prix (40 à 80€) est nettement inférieur au coût d&apos;une seconde rotation (150 à 200€).</p>
+
+<h2>Quels déchets peut-on mettre dans une benne de déménagement ?</h2>
+<p>Un déménagement produit des déchets très variés. La bonne nouvelle : la plupart sont acceptés dans une <IL href="/location-benne-encombrants">benne encombrants</IL>. Voici la répartition typique :</p>
+
+<h3>✅ Déchets acceptés (encombrants classiques)</h3>
+<ul>
+<li><strong>Mobilier</strong> : canapés, armoires, commodes, sommiers, matelas, tables, chaises</li>
+<li><strong>Électroménager</strong> : micro-ondes, plaques, hottes (hors frigo et congélateur — DEEE à part)</li>
+<li><strong>Textile et literie</strong> : moquettes, rideaux, couettes, oreillers</li>
+<li><strong>Cartons et emballages</strong> : cartons, films plastique, papier bulle</li>
+<li><strong>Bois et petite menuiserie</strong> : étagères, planches, tasseaux, portes ​intérieures</li>
+</ul>
+
+<h3>⚠️ Déchets nécessitant une benne spécifique</h3>
+<ul>
+<li><strong>Gravats</strong> (plâtre, parpaings, carrelage en cas de rénovation) → <IL href="/location-benne-gravats">benne gravats</IL></li>
+<li><strong>Déchets verts</strong> (arbustes, haie arrachée si jardinage en parallèle) → <IL href="/location-benne-dechets-verts">benne déchets verts</IL></li>
+<li><strong>Déchets mixtes professionnels</strong> (chantier lourd) → <IL href="/location-benne-dib">benne DIB</IL></li>
+</ul>
+
+<h3>🚫 Déchets interdits dans toutes les bennes</h3>
+<ul>
+<li>Amiante, peintures, solvants et produits chimiques</li>
+<li>Pneus, huiles de vidange et batteries</li>
+<li>Déchets d&apos;équipements électriques et électroniques (DEEE) : frigos, téléviseurs, ordinateurs</li>
+<li>Déchets médicaux et médicaments</li>
+</ul>
+
+<Callout type="warning" title="⚠️ Attention au mélange gravats + encombrants">
+<p>Si votre déménagement s&apos;accompagne de travaux (abattre une cloison, refaire un sol), <strong>ne mélangez pas gravats et encombrants</strong> dans la même benne. Le loueur reclassera le contenu en DIB tout-venant, avec un surcoût de 40 à 80%. Commandez deux bennes séparées : c&apos;est souvent moins cher au total. Consultez notre <IL href="/guides/tri-dechets-chantier-guide">guide du tri des déchets de chantier</IL> pour les bonnes pratiques.</p>
+</Callout>
+
+<h2>Comment organiser la location de benne le jour du déménagement</h2>
+<p>Un planning bien pensé vous évite le chaos. Voici la chronologie idéale :</p>
+
+<h3>J-15 à J-10 : la préparation</h3>
+<ul>
+<li><strong>Estimez le volume</strong> : faites le tour de chaque pièce et listez les objets à jeter.</li>
+<li><strong>Demandez vos devis</strong> : comparez au moins 3 loueurs via notre <IL href="/devis">formulaire de devis gratuit</IL>. Les prix varient de 30 à 50% d&apos;un prestataire à l&apos;autre.</li>
+<li><strong>Vérifiez l&apos;emplacement</strong> : terrain privé (cour, allée) = pas d&apos;autorisation. Voie publique = demande de voirie en mairie.</li>
+</ul>
+
+<h3>J-2 : livraison de la benne</h3>
+<ul>
+<li>Le camion-grue livre la benne à l&apos;emplacement convenu. Vérifiez que l&apos;accès est dégagé (largeur minimale de 3m pour le passage du camion).</li>
+<li>Commencez à charger les gros encombrants : canapé, sommier, moquette. Ce sont les pièces les plus volumineuses.</li>
+</ul>
+
+<h3>Jour J : le déménagement</h3>
+<ul>
+<li>Chargez les derniers déchets de tri : cartons abîmés, vieux rideaux, petits meubles cassés.</li>
+<li><strong>Astuce gain de place</strong> : démontez les meubles avant de les jeter. Un meuble démonté occupe 50 à 70% de volume en moins.</li>
+<li>Ne dépassez pas le bord supérieur de la benne (refus d&apos;enlèvement ou supplément de 50 à 100€).</li>
+</ul>
+
+<h3>J+1 à J+5 : enlèvement</h3>
+<ul>
+<li>Appelez le loueur pour planifier l&apos;enlèvement dès que la benne est pleine.</li>
+<li>Conservez le BSD (Bordereau de Suivi des Déchets) pendant <strong>3 ans minimum</strong>.</li>
+</ul>
+
+<h2>Prix d&apos;une benne pour déménagement : à quoi s&apos;attendre</h2>
+<p>Les tarifs dépendent du volume, du type de déchets et de votre localisation. Pour un déménagement standard avec principalement des encombrants, voici les fourchettes 2026 :</p>
+<ul>
+<li><strong>Benne 3m³ encombrants</strong> : 149 à 179€ TTC</li>
+<li><strong>Benne 6m³ encombrants</strong> : 199 à 249€ TTC</li>
+<li><strong>Benne 10m³ encombrants</strong> : 279 à 329€ TTC</li>
+<li><strong>Benne 15m³ encombrants</strong> : 349 à 399€ TTC</li>
+<li><strong>Benne 20m³ encombrants</strong> : 429 à 499€ TTC</li>
+</ul>
+<p>Ces tarifs incluent la livraison, 7 jours de location et l&apos;évacuation vers un centre de tri agréé. Pour un détail complet par type de déchet et par ville, consultez notre <IL href="/guides/prix-location-benne-guide-complet">grille tarifaire complète 2026</IL>.</p>
+
+<Callout type="info" title="💰 Comment réduire la facture ?">
+<p><strong>1. Donnez avant de jeter</strong> : meubles en bon état sur Leboncoin, Emmaüs, Ressourceries — c&apos;est gratuit et vous réduisez le volume de la benne.<br/>
+<strong>2. Triez par matière</strong> : une benne mono-matériau (bois seul, carton seul) coûte 30 à 50% moins cher qu&apos;une benne tout-venant.<br/>
+<strong>3. Déménagez hors saison</strong> : les tarifs sont plus bas de novembre à février (basse saison des loueurs).<br/>
+<strong>4. Négociez la durée</strong> : si vous n&apos;avez besoin de la benne que 3-4 jours au lieu de 7, certains loueurs accordent une réduction.</p>
+</Callout>
+
+<h2>Benne de déménagement : les erreurs fréquentes à éviter</h2>
+<p>Après des centaines de retours clients, voici les 5 erreurs les plus courantes :</p>
+<ol>
+<li><strong>Sous-estimer le volume</strong> : c&apos;est l&apos;erreur n°1. Un salon complet (canapé + table + meuble TV + tapis) représente à lui seul 3 à 4m³.</li>
+<li><strong>Oublier l&apos;autorisation de voirie</strong> : si la benne est sur le trottoir et que vous n&apos;avez pas d&apos;autorisation, vous risquez 38 à 135€ d&apos;amende et l&apos;enlèvement immédiat par la fourrière.</li>
+<li><strong>Mélanger les types de déchets</strong> : gravats + encombrants dans la même benne = reclassement en DIB et <strong>surcoût de 40 à 80%</strong>.</li>
+<li><strong>Ne pas dégager l&apos;accès</strong> : le camion-grue mesure 2,5m de large et 10m de long. Vérifiez que rien ne bloque le passage (voitures garées, branches basses, portail trop étroit).</li>
+<li><strong>S&apos;y prendre trop tard</strong> : en pleine période de déménagements (juin-septembre), les disponibilités sont limitées. Réservez 2 à 3 semaines à l&apos;avance.</li>
+</ol>
+
+<p>Un déménagement bien anticipé, c&apos;est un stress en moins. La location de benne vous décharge (littéralement) de la gestion des déchets pour vous concentrer sur l&apos;essentiel : votre nouvelle vie dans votre nouveau logement. Comparez les <IL href="/tarifs">tarifs dans votre département</IL> et trouvez le loueur le plus proche via notre réseau de partenaires.</p>
+
+<CTABlock text="Déménagement prévu ? Recevez 3 devis benne gratuits en 2 minutes." />
+</>
+),
+
 };

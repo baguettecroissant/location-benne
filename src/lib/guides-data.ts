@@ -110,6 +110,20 @@ export const guides: GuideArticle[] = [
         readTime: 11,
         tags: ["brulage interdit", "dechets verts", "alternative", "compostage", "amende"],
     },
+    {
+        slug: "location-benne-demenagement",
+        title: "Location de Benne pour Déménagement : Guide Complet",
+        metaTitle: "Location de Benne pour Déménagement : Guide Complet 2026",
+        metaDescription: "Benne pour déménagement : quel volume choisir, prix de 149€ à 449€, types de déchets acceptés et organisation étape par étape. Devis gratuit.",
+        excerpt: "Un déménagement génère 3 à 20m³ de déchets. Découvrez comment choisir la bonne benne, organiser le tri et maîtriser votre budget d\u0027évacuation.",
+        image: "/images/guides/location-benne-demenagement.png",
+        imageAlt: "Benne jaune chargée de meubles et cartons devant une maison en cours de déménagement",
+        category: 'guide-pratique',
+        publishDate: "2026-03-25",
+        updatedDate: "2026-03-25",
+        readTime: 12,
+        tags: ["benne déménagement", "location benne", "déménagement", "encombrants", "évacuation meubles"],
+    },
 ];
 
 export function getGuideBySlug(slug: string): GuideArticle | undefined {
