@@ -145,12 +145,6 @@ export function CityAutocomplete({ onSelect, defaultValue }: CityAutocompletePro
                     <span className="hidden sm:inline">{isGeolocating ? "Détection..." : "Ma position"}</span>
                 </button>
             </div>
-
-            {/* Hidden inputs for form submission */}
-            <input type="hidden" name="ville" value={selectedCity?.name || query} />
-            <input type="hidden" name="code_postal" value={selectedCity?.zip || ""} />
-            <input type="hidden" name="departement" value={selectedCity?.department_name || ""} />
-
             {/* Dropdown */}
             {isOpen && results.length > 0 && (
                 <div className="absolute z-50 w-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden max-h-80 overflow-y-auto">

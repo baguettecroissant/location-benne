@@ -7,6 +7,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CityAutocomplete } from "@/components/forms/CityAutocomplete";
 
+interface SelectedCity {
+    name: string;
+    zip: string;
+    department_name: string;
+    department_code: string;
+}
+
 type ProfileType = "particulier" | "professionnel";
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -16,8 +23,13 @@ export default function DevisPage() {
     const [selectedVolume, setSelectedVolume] = useState("");
     const [wasteType, setWasteType] = useState("");
     const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+    const [selectedCity, setSelectedCity] = useState<SelectedCity | null>(null);
 
     function handleNextStep() {
+        if (!selectedCity) {
+            alert("Veuillez sélectionner un lieu de livraison.");
+            return;
+        }
         if (!wasteType || !selectedVolume) {
             alert("Veuillez sélectionner un type de déchet et un volume.");
             return;
@@ -119,6 +131,12 @@ export default function DevisPage() {
                             <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-lg border border-slate-100 overflow-hidden">
                                 <div className="p-6 md:p-8">
 
+                                    {/* Hidden fields for city data — always present in the form DOM */}
+                                    <input type="hidden" name="lieu_livraison" value={selectedCity ? `${selectedCity.name} (${selectedCity.zip}) — ${selectedCity.department_name}` : ""} />
+                                    <input type="hidden" name="ville" value={selectedCity?.name || ""} />
+                                    <input type="hidden" name="code_postal" value={selectedCity?.zip || ""} />
+                                    <input type="hidden" name="departement" value={selectedCity?.department_name || ""} />
+
                                     {/* ═══════════ STEP 1: VOTRE PROJET ═══════════ */}
                                     {step === 1 && (
                                         <div className="space-y-6">
@@ -154,7 +172,7 @@ export default function DevisPage() {
                                             {/* LOCALISATION */}
                                             <div>
                                                 <label className="block text-sm font-semibold text-slate-700 mb-3">Lieu de livraison *</label>
-                                                <CityAutocomplete onSelect={() => {}} />
+                                                <CityAutocomplete onSelect={(city) => setSelectedCity(city)} />
                                             </div>
 
                                             {/* TYPE DE DÉCHET */}
@@ -227,6 +245,8 @@ export default function DevisPage() {
                                             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center justify-between">
                                                 <div className="text-sm">
                                                     <span className="font-bold text-slate-900">{profile === "professionnel" ? "Pro" : "Particulier"}</span>
+                                                    <span className="text-slate-400 mx-2">•</span>
+                                                    <span className="text-slate-600">{selectedCity ? `${selectedCity.name} (${selectedCity.zip})` : "—"}</span>
                                                     <span className="text-slate-400 mx-2">•</span>
                                                     <span className="text-slate-600">{wasteType || "—"}</span>
                                                     <span className="text-slate-400 mx-2">•</span>

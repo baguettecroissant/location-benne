@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -82,6 +83,12 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyMobileCTA />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="8c10e507-8d64-43e3-a035-51c9a44bd635"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
