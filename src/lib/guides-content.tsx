@@ -583,4 +583,290 @@ En cas de récidive, les montants peuvent être multipliés. La DREAL (Direction
 </>
 ),
 
+// ═══════════════════════════════════════════════════════════════
+// ARTICLE 8 — LOCATION DE BENNE POUR PARTICULIER : GUIDE PAS À PAS
+// ═══════════════════════════════════════════════════════════════
+"location-benne-particulier-guide": (
+<>
+<p>Vous êtes particulier et vous avez des gravats, de vieux meubles ou des déchets de jardin à évacuer ? La <strong>location de benne pour particulier</strong> est la solution la plus simple et la plus économique dès que le volume dépasse 1m³. Pourtant, beaucoup hésitent : combien ça coûte ? Faut-il une autorisation ? Quels déchets sont acceptés ? Ce guide pas à pas répond à toutes ces questions et vous accompagne de la demande de devis jusqu&apos;à l&apos;enlèvement de la benne.</p>
+
+<h2>Étape 1 — Identifier la nature de vos déchets</h2>
+<p>La première chose à déterminer est le <strong>type de déchets</strong> que vous devez évacuer. C&apos;est ce critère qui détermine le type de benne à commander, et donc le tarif. En tant que particulier, vous êtes généralement concerné par l&apos;un de ces quatre cas :</p>
+<ul>
+<li><strong>Gravats</strong> (béton, carrelage, briques, parpaings, plâtre) → <IL href="/location-benne-gravats">benne gravats</IL></li>
+<li><strong>Encombrants</strong> (meubles, matelas, électroménager, moquettes) → <IL href="/location-benne-encombrants">benne encombrants</IL></li>
+<li><strong>Déchets verts</strong> (branches, tontes, feuilles, haies) → <IL href="/location-benne-dechets-verts">benne déchets verts</IL></li>
+<li><strong>Déchets mixtes</strong> (mélange de tout, chantier de rénovation complète) → <IL href="/location-benne-dib">benne DIB</IL></li>
+</ul>
+
+<Callout type="warning" title="⚠️ Ne mélangez jamais gravats et encombrants">
+<p>C&apos;est l&apos;erreur la plus fréquente chez les particuliers. Si vous mettez des gravats dans une benne encombrants (ou inversement), le loueur <strong>reclassera le contenu en DIB tout-venant</strong>, avec un surcoût de 40 à 80%. En cas de doute, commandez deux bennes séparées : c&apos;est souvent moins cher au total. Consultez notre <IL href="/guides/tri-dechets-chantier-guide">guide du tri des déchets</IL> pour y voir clair.</p>
+</Callout>
+
+<h2>Étape 2 — Choisir le bon volume de benne</h2>
+<p>Le volume est le second critère déterminant. Les particuliers ont généralement besoin de bennes de <strong>3m³ à 15m³</strong>. Voici des repères concrets par type de projet :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-4 py-3 text-left font-bold">Projet du particulier</th><th className="px-4 py-3 text-center font-bold">Volume estimé</th><th className="px-4 py-3 text-center font-bold">Benne conseillée</th><th className="px-4 py-3 text-center font-bold">Budget TTC</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3">Rénovation salle de bain (gravats)</td><td className="px-4 py-3 text-center">1,5 à 3m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">3m³</td><td className="px-4 py-3 text-center">149 – 179€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Rénovation cuisine complète</td><td className="px-4 py-3 text-center">2 à 5m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">6m³</td><td className="px-4 py-3 text-center">199 – 279€</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Élagage / abattage d&apos;arbre</td><td className="px-4 py-3 text-center">5 à 15m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">10m³</td><td className="px-4 py-3 text-center">269 – 299€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Vidage de garage / grenier</td><td className="px-4 py-3 text-center">5 à 10m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">10m³</td><td className="px-4 py-3 text-center">279 – 329€</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Rénovation lourde (murs, sols)</td><td className="px-4 py-3 text-center">5 à 10m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">10m³</td><td className="px-4 py-3 text-center">299 – 399€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Vidage de maison complète</td><td className="px-4 py-3 text-center">15 à 30m³</td><td className="px-4 py-3 text-center font-bold text-amber-600">20m³</td><td className="px-4 py-3 text-center">399 – 499€</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Pour une estimation plus fine, consultez notre <IL href="/guides/comment-choisir-taille-benne">guide complet sur le choix de la taille de benne</IL>. La règle d&apos;or reste la même : <strong>prenez toujours la taille au-dessus</strong>. L&apos;écart de prix entre deux volumes consécutifs (40 à 80€) est très inférieur au prix d&apos;une seconde rotation (150 à 200€).</p>
+
+<h2>Étape 3 — Demander et comparer des devis</h2>
+<p>Les prix de location de benne varient de <strong>30 à 50%</strong> entre deux loueurs pour la même prestation. C&apos;est pourquoi il est essentiel de comparer au minimum 3 devis. Voici ce qu&apos;un devis sérieux doit inclure :</p>
+<ul>
+<li><strong>Le volume</strong> de la benne (en m³)</li>
+<li><strong>Le type de déchets</strong> pris en charge (gravats, encombrants, déchets verts, DIB)</li>
+<li><strong>La durée de location</strong> (7 jours standard, jours supplémentaires facturés 5 à 15€/jour)</li>
+<li><strong>Le transport aller-retour</strong> (livraison + enlèvement par camion-grue)</li>
+<li><strong>Le traitement des déchets</strong> (acheminement vers ISDI, centre de tri ou plateforme de compostage agréé)</li>
+<li><strong>Le tonnage maximal</strong> inclus (attention aux dépassements facturés 15 à 30€/tonne)</li>
+</ul>
+
+<Callout type="tip" title="💡 Vérifiez les surcoûts potentiels">
+<p>Demandez toujours au loueur de lister tous les surcoûts possibles : dépassement de poids, remplissage excessif (au-dessus du bord), jours supplémentaires, frais d&apos;attente du camion. Un devis transparent évite les mauvaises surprises. Consultez notre <IL href="/guides/prix-location-benne-guide-complet">guide des prix 2026</IL> pour connaître les tarifs de référence.</p>
+</Callout>
+
+<h2>Étape 4 — Préparer l&apos;emplacement de la benne</h2>
+<p>La benne est livrée par un <strong>camion-grue</strong> qui mesure environ 2,5m de large et 10m de long. L&apos;emplacement de pose doit être réfléchi en amont :</p>
+
+<h3>Sur terrain privé (solution recommandée)</h3>
+<p>Si vous disposez d&apos;une cour, d&apos;une allée ou d&apos;un jardin accessible au camion, privilégiez systématiquement cette option. Avantages :</p>
+<ul>
+<li><strong>Aucune autorisation</strong> à demander</li>
+<li><strong>Aucun frais</strong> de redevance voirie</li>
+<li><strong>Aucune contrainte de durée</strong> imposée par la mairie</li>
+<li>Accès direct la benne à toute heure</li>
+</ul>
+<p>Assurez-vous simplement que le sol est suffisamment stable (pas de pelouse molle — privilégiez gravier, béton ou bitume) et que le portail ou l&apos;accès fait <strong>au moins 3m de largeur</strong>.</p>
+
+<h3>Sur la voie publique (autorisation obligatoire)</h3>
+<p>Si la benne doit être posée sur le trottoir, la chaussée ou un parking public, vous devez impérativement obtenir une <strong>autorisation d&apos;occupation du domaine public</strong> auprès de votre mairie. Cette démarche prend de <strong>5 à 21 jours</strong> selon la taille de votre commune, pour un coût de <strong>30 à 200€</strong>. Bonne nouvelle : la plupart des loueurs proposent de gérer cette formalité pour vous, moyennant un supplément de 50 à 100€.</p>
+<p>Pour toutes les démarches détaillées, consultez notre <IL href="/guides/autorisation-voirie-benne-guide">guide complet sur l&apos;autorisation de voirie</IL>.</p>
+
+<h2>Étape 5 — Remplir la benne correctement</h2>
+<p>Le chargement de la benne est une étape souvent sous-estimée par les particuliers. Pourtant, quelques bonnes pratiques vous évitent des surcoûts importants :</p>
+
+<h3>Les règles d&apos;or du chargement</h3>
+<ul>
+<li><strong>Ne dépassez jamais le bord supérieur</strong> : si les déchets dépassent, le chauffeur peut refuser l&apos;enlèvement ou facturer un supplément de 50 à 100€.</li>
+<li><strong>Répartissez le poids uniformément</strong> : ne concentrez pas les gravats d&apos;un seul côté, au risque de déséquilibrer la benne lors du levage.</li>
+<li><strong>Cassez et démontez</strong> avant de charger : démonter un meuble réduit son volume de 50 à 70%. Cassez les grandes plaques de placo en morceaux.</li>
+<li><strong>Chargez les éléments lourds en premier</strong> (gravats, carrelage) puis les éléments légers et volumineux au-dessus (cartons, plastiques).</li>
+<li><strong>Respectez le tonnage maximal</strong> : une benne 3m³ gravats est limitée à environ 4,5 tonnes. Au-delà, le loueur facture 15 à 30€/tonne supplémentaire.</li>
+</ul>
+
+<Callout type="info" title="📋 Les déchets interdits dans toutes les bennes">
+<p>En tant que particulier, vous ne pouvez <strong>jamais</strong> mettre dans une benne :<br/>
+• <strong>Amiante</strong> (obligatoirement traité en filière spécialisée — devis spécifique nécessaire)<br/>
+• <strong>Peintures, solvants, produits chimiques</strong> → déchetterie, rayon « déchets dangereux »<br/>
+• <strong>Pneus, huiles de vidange, batteries</strong> → repris gratuitement par les garagistes<br/>
+• <strong>DEEE</strong> (frigos, téléviseurs, ordinateurs) → obligation de reprise par le vendeur (loi AGEC 2020)<br/>
+• <strong>Déchets médicaux</strong> → pharmacie ou collecte spécifique</p>
+</Callout>
+
+<h2>Étape 6 — L&apos;enlèvement et la traçabilité</h2>
+<p>Une fois la benne pleine, contactez le loueur pour planifier l&apos;enlèvement. Le camion-grue intervient généralement sous <strong>24 à 48h</strong>. L&apos;opération dure environ 15 minutes.</p>
+<p>À l&apos;enlèvement, le loueur vous remet un <strong>Bordereau de Suivi des Déchets (BSD)</strong>. Ce document, obligatoire depuis la <strong>loi AGEC (2020)</strong>, atteste que vos déchets ont été acheminés vers un centre de traitement agréé. Conservez-le <strong>3 ans minimum</strong> : en cas de contrôle, il prouve votre bonne foi et vous protège légalement.</p>
+<p>Les déchets sont ensuite orientés vers la filière adaptée :</p>
+<ul>
+<li><strong>Gravats</strong> → ISDI (Installation de Stockage de Déchets Inertes) ou plateforme de recyclage</li>
+<li><strong>Encombrants</strong> → Centre de tri, puis valorisation matière ou énergétique</li>
+<li><strong>Déchets verts</strong> → Plateforme de compostage industriel</li>
+<li><strong>DIB</strong> → Centre de tri, puis recyclage ou enfouissement (ISDND)</li>
+</ul>
+
+<h2>Combien coûte une location de benne pour un particulier en 2026 ?</h2>
+<p>Les tarifs incluent généralement la livraison, 7 jours de location et le traitement des déchets. Voici les fourchettes moyennes nationales :</p>
+<ul>
+<li><strong>Benne 3m³</strong> : 129€ (déchets verts) à 179€ (gravats)</li>
+<li><strong>Benne 6m³</strong> : 199€ à 279€</li>
+<li><strong>Benne 10m³</strong> : 269€ à 399€</li>
+<li><strong>Benne 15m³</strong> : 339€ à 399€</li>
+<li><strong>Benne 20m³</strong> : 399€ à 449€</li>
+</ul>
+<p>Les prix varient selon votre localisation (écart de 20 à 40% entre zone urbaine et zone rurale) et la saison (comptez 10 à 15% de plus au printemps et en été, haute saison). Pour un comparatif complet, consultez notre <IL href="/tarifs">page tarifs par département</IL>.</p>
+
+<h2>Les 5 erreurs les plus fréquentes chez les particuliers</h2>
+<ol>
+<li><strong>Sous-estimer le volume</strong> : une cuisine complète (meubles + carrelage + électroménager) représente à elle seule 3 à 5m³. Multipliez votre première estimation par 1,3.</li>
+<li><strong>Oublier l&apos;autorisation de voirie</strong> : pas d&apos;autorisation sur voie publique = amende de 38 à 135€ et risque d&apos;enlèvement par la fourrière.</li>
+<li><strong>Commander trop tard</strong> : en haute saison (avril-septembre), les disponibilités se réduisent vite. Réservez <strong>2 à 3 semaines à l&apos;avance</strong>.</li>
+<li><strong>Ne pas vérifier l&apos;accès</strong> : le camion-grue fait 10m de long. Si votre rue est trop étroite ou si une branche basse bloque le passage, la livraison est impossible.</li>
+<li><strong>Ne comparer qu&apos;un seul devis</strong> : les prix varient de 30 à 50% d&apos;un loueur à l&apos;autre. Comparez systématiquement au moins 3 offres.</li>
+</ol>
+
+<p>La location de benne pour particulier est une solution accessible, rapide et économique pour tous vos projets de rénovation, de débarras ou de jardinage. En suivant ces 6 étapes, vous maîtrisez votre budget, respectez la réglementation et vous débarrassez sereinement de tous vos déchets. N&apos;attendez plus : comparez les <IL href="/departements">loueurs de bennes dans votre département</IL> et recevez vos devis gratuits en quelques clics.</p>
+
+<CTABlock text="Particulier ? Recevez 3 devis benne gratuits et sans engagement en 2 minutes." />
+</>
+),
+
+// ═══════════════════════════════════════════════════════════════
+// ARTICLE 9 — DÉCHETTERIE OU BENNE : COMPARATIF COMPLET
+// ═══════════════════════════════════════════════════════════════
+"dechetterie-ou-benne-comparatif": (
+<>
+<p>Vous avez des gravats, des encombrants ou des déchets verts à évacuer et vous hésitez entre la <strong>déchetterie</strong> et la <strong>location de benne</strong> ? Les deux solutions ont leurs avantages et leurs limites. La déchetterie est gratuite mais contraignante ; la benne est payante mais livrée chez vous. Ce comparatif complet analyse les deux options sur 8 critères concrets pour vous aider à faire le bon choix selon votre projet.</p>
+
+<h2>Déchetterie vs Benne : le tableau comparatif</h2>
+<p>Avant d&apos;entrer dans le détail, voici une vue d&apos;ensemble des deux solutions :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-4 py-3 text-left font-bold">Critère</th><th className="px-4 py-3 text-center font-bold">🏭 Déchetterie</th><th className="px-4 py-3 text-center font-bold">🚛 Benne de location</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3 font-semibold">Prix</td><td className="px-4 py-3 text-center text-green-600 font-bold">Gratuit*</td><td className="px-4 py-3 text-center">129 à 599€ TTC</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-semibold">Volume accepté</td><td className="px-4 py-3 text-center">0,5 à 1m³ / visite</td><td className="px-4 py-3 text-center text-green-600 font-bold">3 à 30m³</td></tr>
+<tr className="border-t"><td className="px-4 py-3 font-semibold">Transport</td><td className="px-4 py-3 text-center">À votre charge</td><td className="px-4 py-3 text-center text-green-600 font-bold">Livraison + enlèvement inclus</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-semibold">Disponibilité</td><td className="px-4 py-3 text-center">Horaires imposés</td><td className="px-4 py-3 text-center text-green-600 font-bold">24h/24, 7j/7</td></tr>
+<tr className="border-t"><td className="px-4 py-3 font-semibold">Effort physique</td><td className="px-4 py-3 text-center">Chargement + déchargement</td><td className="px-4 py-3 text-center text-green-600 font-bold">Chargement seul</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-semibold">Délai de mise en place</td><td className="px-4 py-3 text-center text-green-600 font-bold">Immédiat</td><td className="px-4 py-3 text-center">24 à 72h</td></tr>
+<tr className="border-t"><td className="px-4 py-3 font-semibold">Traçabilité (BSD)</td><td className="px-4 py-3 text-center">Non</td><td className="px-4 py-3 text-center text-green-600 font-bold">Oui (obligatoire loi AGEC)</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-semibold">Types de déchets</td><td className="px-4 py-3 text-center text-green-600 font-bold">Très variés (DEEE, DMS…)</td><td className="px-4 py-3 text-center">Gravats, encombrants, verts, DIB</td></tr>
+</tbody>
+</table>
+</div>
+<p className="text-sm text-slate-500"><em>* Gratuit pour les particuliers, dans la limite du quota communal (souvent 1m³ par visite, 2 à 6 visites/an selon la commune).</em></p>
+
+<h2>La déchetterie : gratuite, mais à quel prix ?</h2>
+<p>La déchetterie municipale est la solution historique pour les particuliers. Financée par la taxe d&apos;enlèvement des ordures ménagères (TEOM), elle est <strong>gratuite à l&apos;usage</strong> pour les résidents de la commune. Mais cette gratuité a des contreparties importantes.</p>
+
+<h3>Les avantages de la déchetterie</h3>
+<ul>
+<li><strong>Gratuité</strong> : aucun coût direct pour les particuliers (hors carburant et temps).</li>
+<li><strong>Acceptation large</strong> : les déchetteries acceptent des catégories que les bennes refusent — DEEE (frigos, téléviseurs), piles, huiles usagées, peintures, déchets ménagers spéciaux (DMS), pneus.</li>
+<li><strong>Tri sur place</strong> : les bennes de la déchetterie sont pré-triées par matériau (bois, ferraille, carton, gravats, déchets verts), ce qui facilite le recyclage.</li>
+<li><strong>Proximité</strong> : la France compte environ 4 700 déchetteries, soit une tous les 13 km en moyenne.</li>
+</ul>
+
+<h3>Les inconvénients de la déchetterie</h3>
+<ul>
+<li><strong>Volume limité</strong> : la plupart des communes plafonnent à <strong>1m³ par visite</strong> et à 2-6 visites par an. Au-delà, des frais s&apos;appliquent (10 à 30€/m³ supplémentaire).</li>
+<li><strong>Horaires contraignants</strong> : ouverture de 8h30 à 17h en semaine, 9h à 12h le samedi dans de nombreuses communes. Fermé le dimanche et jours fériés.</li>
+<li><strong>Files d&apos;attente</strong> : 20 à 45 minutes d&apos;attente en moyenne le samedi matin (pic d&apos;affluence).</li>
+<li><strong>Transport à votre charge</strong> : il faut charger le véhicule, conduire, décharger, recommencer. Pour 5m³ de gravats, comptez <strong>5 à 8 allers-retours</strong> en utilitaire.</li>
+<li><strong>Usure du véhicule</strong> : les gravats pèsent ~1,5 tonne/m³. Charger une remorque de 500 kg de gravats 5 fois use les pneus, les suspensions et consomme du carburant.</li>
+</ul>
+
+<Callout type="info" title="💡 Le coût caché de la déchetterie">
+<p>La déchetterie est « gratuite » mais vos allers-retours ne le sont pas. Pour évacuer <strong>5m³ de gravats</strong> (une rénovation de cuisine) :<br/>
+• <strong>Location utilitaire</strong> : 60 à 80€/jour<br/>
+• <strong>Carburant</strong> : 20 à 30€ (5-8 trajets × 15 km en moyenne)<br/>
+• <strong>Temps</strong> : 4 à 6 heures de votre journée (chargement + conduite + attente + déchargement)<br/>
+<strong>Total réel</strong> : 80 à 110€ + une journée perdue. Soit <strong>presque le prix d&apos;une benne 3m³ livrée chez vous</strong> (149-179€), sans aucun effort de transport.</p>
+</Callout>
+
+<h2>La benne de location : le confort a un prix</h2>
+<p>La <IL href="/guides/location-benne-particulier-guide">location de benne pour particulier</IL> fonctionne sur un principe simple : un camion-grue livre une benne devant votre domicile, vous la remplissez à votre rythme pendant 7 jours, puis le loueur la récupère et gère le traitement.</p>
+
+<h3>Les avantages de la benne</h3>
+<ul>
+<li><strong>Volume illimité</strong> : de 3m³ à 30m³, il existe une benne pour chaque projet — de la salle de bain à la succession complète. Consultez notre <IL href="/guides/comment-choisir-taille-benne">guide des tailles de bennes</IL>.</li>
+<li><strong>Zéro transport</strong> : la benne est livrée et enlevée par le loueur. Aucun trajet, aucun chargement de voiture, aucune file d&apos;attente.</li>
+<li><strong>Disponibilité 24h/24</strong> : la benne est posée devant chez vous, vous la remplissez quand vous voulez — le soir, le week-end, entre deux sessions de travaux.</li>
+<li><strong>Traçabilité légale</strong> : le loueur vous délivre un <strong>Bordereau de Suivi des Déchets (BSD)</strong>, obligatoire depuis la <strong>loi AGEC (2020)</strong>. Vous êtes couvert en cas de contrôle.</li>
+<li><strong>Gain de temps considérable</strong> : une benne 6m³ remplace 6 à 8 allers-retours en déchetterie. Vous économisez une journée entière de travail.</li>
+</ul>
+
+<h3>Les inconvénients de la benne</h3>
+<ul>
+<li><strong>Coût</strong> : de 129€ pour une benne 3m³ déchets verts à 599€ pour une benne 30m³ encombrants. Consultez notre <IL href="/guides/prix-location-benne-guide-complet">grille tarifaire complète</IL>.</li>
+<li><strong>Espace de pose</strong> : la benne occupe environ 4m × 2m. Il faut un accès carrossable pour le camion-grue (3m de largeur minimum).</li>
+<li><strong>Autorisation de voirie</strong> : si la benne est posée sur la voie publique (trottoir, chaussée), une <IL href="/guides/autorisation-voirie-benne-guide">autorisation de voirie</IL> est obligatoire (30 à 200€, délai 5 à 21 jours).</li>
+<li><strong>Déchets limités</strong> : les bennes n&apos;acceptent pas l&apos;amiante, les DEEE, les peintures, les pneus ni les produits chimiques (→ déchetterie obligatoire pour ces déchets).</li>
+</ul>
+
+<h2>Quel volume pour quelle solution ?</h2>
+<p>Le critère décisif est le <strong>volume de déchets à évacuer</strong>. Voici un guide de décision rapide :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-4 py-3 text-left font-bold">Volume</th><th className="px-4 py-3 text-left font-bold">Solution recommandée</th><th className="px-4 py-3 text-left font-bold">Pourquoi</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3 font-bold text-amber-600">&lt; 0,5m³</td><td className="px-4 py-3 font-semibold">🏭 Déchetterie</td><td className="px-4 py-3">Gratuit, 1 seul trajet en voiture suffit.</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-bold text-amber-600">0,5 à 1m³</td><td className="px-4 py-3 font-semibold">🏭 Déchetterie ou Big Bag</td><td className="px-4 py-3">Déchetterie si proche, Big Bag (80-150€) si accès limité.</td></tr>
+<tr className="border-t"><td className="px-4 py-3 font-bold text-amber-600">1 à 3m³</td><td className="px-4 py-3 font-semibold">🚛 Benne 3m³</td><td className="px-4 py-3">Le seuil de rentabilité : benne (149-179€) vs 3-4 allers-retours.</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3 font-bold text-amber-600">3 à 10m³</td><td className="px-4 py-3 font-semibold text-green-600">🚛 Benne (choix évident)</td><td className="px-4 py-3">Impossible en déchetterie en un jour. Benne 6 ou 10m³ : 219-399€.</td></tr>
+<tr className="border-t"><td className="px-4 py-3 font-bold text-amber-600">10 à 30m³</td><td className="px-4 py-3 font-semibold text-green-600">🚛 Benne (seule option viable)</td><td className="px-4 py-3">Vidage de maison, succession. Benne 15 à 30m³ : 339-599€.</td></tr>
+</tbody>
+</table>
+</div>
+
+<Callout type="tip" title="💡 La stratégie combinée : le meilleur des deux mondes">
+<p>Pour les gros projets de rénovation, la solution optimale est souvent de <strong>combiner les deux</strong> :<br/>
+• <strong>Benne</strong> pour les gros volumes (gravats, encombrants, déchets verts) → <IL href="/location-benne-gravats">benne gravats</IL> ou <IL href="/location-benne-encombrants">benne encombrants</IL><br/>
+• <strong>Déchetterie</strong> pour les déchets spéciaux refusés en benne (pots de peinture, néons, vieux frigo, piles)<br/>
+Vous évacuez 95% du volume sans effort, et vous faites un seul trajet en déchetterie pour les 5% restants.</p>
+</Callout>
+
+<h2>Comparatif des coûts réels : déchetterie vs benne</h2>
+<p>La déchetterie semble gratuite, mais ce n&apos;est vrai que pour de très petits volumes. Dès que le nombre de trajets augmente, les coûts cachés s&apos;accumulent. Voici 3 scénarios réalistes :</p>
+
+<h3>Scénario 1 — Rénovation de salle de bain (2m³ de gravats)</h3>
+<ul>
+<li><strong>Déchetterie</strong> : 3 allers-retours en utilitaire (location 60€ + carburant 15€) + 3h de manutention = <strong>~75€ + ½ journée</strong></li>
+<li><strong>Benne 3m³ gravats</strong> : livraison + 7 jours + enlèvement + traitement = <strong>179€, zéro effort</strong></li>
+</ul>
+
+<h3>Scénario 2 — Vidage de garage (6m³ d&apos;encombrants)</h3>
+<ul>
+<li><strong>Déchetterie</strong> : 8 allers-retours (utilitaire 80€ + carburant 30€) + 6h minimum = <strong>~110€ + 1 journée complète</strong></li>
+<li><strong>Benne 6m³ encombrants</strong> : <strong>219€, chargement à votre rythme sur 7 jours</strong></li>
+</ul>
+
+<h3>Scénario 3 — Élagage + nettoyage de jardin (10m³ de déchets verts)</h3>
+<ul>
+<li><strong>Déchetterie</strong> : 12 à 15 allers-retours (utilitaire 80€ + remorque 40€ + carburant 40€) + 2 jours = <strong>~160€ + 2 jours</strong></li>
+<li><strong>Benne 10m³ déchets verts</strong> : <strong>269€, aucun trajet</strong>. En savoir plus sur les <IL href="/guides/dechets-verts-reglementation-brulage">alternatives au brûlage</IL>.</li>
+</ul>
+
+<p><strong>Conclusion</strong> : à partir de <strong>3m³</strong>, la benne devient compétitive face à la déchetterie quand on intègre le coût réel du transport, du temps et de l&apos;effort physique.</p>
+
+<h2>Quand choisir la déchetterie, quand choisir la benne ?</h2>
+
+<h3>Choisissez la déchetterie si :</h3>
+<ul>
+<li>Votre volume est <strong>inférieur à 1m³</strong></li>
+<li>Vous avez des <strong>déchets spéciaux</strong> (DEEE, peintures, piles, huiles, pneus)</li>
+<li>La déchetterie est à <strong>moins de 5 km</strong> et accessible sans file d&apos;attente (en semaine)</li>
+<li>Vous disposez d&apos;un <strong>véhicule adapté</strong> (break, utilitaire, remorque) et du temps nécessaire</li>
+</ul>
+
+<h3>Choisissez la benne si :</h3>
+<ul>
+<li>Votre volume est <strong>supérieur à 1m³</strong> (le seuil de rentabilité)</li>
+<li>Vous n&apos;avez <strong>pas de véhicule adapté</strong> ou pas le temps de faire des allers-retours</li>
+<li>Vos travaux s&apos;étalent <strong>sur plusieurs jours</strong> et vous avez besoin de charger progressivement</li>
+<li>Vous avez besoin d&apos;un <strong>BSD</strong> pour la traçabilité réglementaire</li>
+<li>Vous voulez éviter tout effort logistique et vous concentrer sur vos travaux</li>
+</ul>
+
+<Callout type="warning" title="⚠️ Attention aux déchets professionnels en déchetterie">
+<p>Les déchetteries municipales sont réservées aux <strong>particuliers</strong>. Les professionnels du BTP (artisans, entreprises) doivent utiliser des <strong>déchetteries professionnelles</strong> (payantes) ou louer des bennes. Depuis le <strong>décret 7 flux (2016)</strong>, les pros sont tenus au tri séparé de leurs déchets. Consultez notre <IL href="/guides/tri-dechets-chantier-guide">guide du décret 7 flux</IL> pour connaître vos obligations.</p>
+</Callout>
+
+<h2>Déchetterie ou benne : le verdict</h2>
+<p>Il n&apos;y a pas de réponse universelle. Le bon choix dépend de <strong>trois facteurs</strong> : le volume de déchets, votre disponibilité et votre équipement de transport. En résumé :</p>
+<ul>
+<li><strong>Moins de 1m³</strong> : la déchetterie reste imbattable (gratuite et un seul trajet).</li>
+<li><strong>1 à 3m³</strong> : la benne devient compétitive si vous valorisez votre temps à plus de 15-20€/heure.</li>
+<li><strong>Plus de 3m³</strong> : la benne est la solution évidente, tant en confort qu&apos;en coût réel.</li>
+</ul>
+<p>Quel que soit votre choix, pensez à trier vos déchets par matériau : c&apos;est bon pour l&apos;environnement et ça réduit la facture. Comparez les <IL href="/tarifs">tarifs dans votre département</IL> et trouvez le loueur le plus proche pour recevoir vos devis gratuits.</p>
+
+<CTABlock text="Plus de 1m³ à évacuer ? Comparez 3 devis benne gratuits en 2 minutes." />
+</>
+),
+
 };
