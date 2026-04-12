@@ -152,6 +152,20 @@ export const guides: GuideArticle[] = [
         readTime: 11,
         tags: ["déchetterie ou benne", "comparatif benne", "alternative déchetterie", "évacuation déchets", "location benne"],
     },
+    {
+        slug: "prix-location-benne-ile-de-france",
+        title: "Prix Location Benne Île-de-France 2026 : Tarifs par Département (75, 77, 78, 91, 92, 93, 94, 95)",
+        metaTitle: "Prix Location Benne Île-de-France 2026 : Tarifs Complets",
+        metaDescription: "Tarifs location de benne en Île-de-France 2026 : Paris, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne. De 199€ à 699€. Comparez et demandez un devis gratuit.",
+        excerpt: "Les prix de location de benne en Île-de-France sont 15 à 30% plus élevés que la moyenne nationale. Grille tarifaire complète par département, surcoûts parisiens et astuces pour économiser.",
+        image: "/images/guides/prix-location-benne-ile-de-france.png",
+        imageAlt: "Benne jaune livrée par un camion-grue dans une rue parisienne avec immeubles haussmanniens",
+        category: 'prix',
+        publishDate: "2026-04-12",
+        updatedDate: "2026-04-12",
+        readTime: 13,
+        tags: ["prix benne Île-de-France", "location benne Paris", "tarif benne 92", "benne 93", "benne IDF"],
+    },
 ];
 
 export function getGuideBySlug(slug: string): GuideArticle | undefined {

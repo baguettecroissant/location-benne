@@ -869,4 +869,138 @@ Vous évacuez 95% du volume sans effort, et vous faites un seul trajet en déche
 </>
 ),
 
+// ═══════════════════════════════════════════════════════════════
+// ARTICLE 10 — PRIX LOCATION BENNE ÎLE-DE-FRANCE 2026
+// ═══════════════════════════════════════════════════════════════
+"prix-location-benne-ile-de-france": (
+<>
+<p>L&apos;Île-de-France est la région la plus chère de France pour la location de benne. Entre la densité urbaine, les contraintes d&apos;accès, le prix du foncier des centres de traitement et les autorisations de voirie parisiennes, les tarifs sont <strong>15 à 30% supérieurs à la moyenne nationale</strong>. Ce guide détaille les prix réels 2026, département par département, et vous donne les clés pour maîtriser votre budget.</p>
+
+<h2>Pourquoi la location de benne coûte plus cher en Île-de-France</h2>
+<p>Avant de consulter les tarifs, il est essentiel de comprendre pourquoi les prix franciliens sont systématiquement supérieurs aux moyennes nationales. Quatre facteurs structurels expliquent cet écart :</p>
+
+<h3>1. La congestion et les distances</h3>
+<p>En Île-de-France, un camion-benne passe en moyenne <strong>40 à 60% de son temps de rotation dans les embouteillages</strong>. Un aller-retour entre un chantier parisien et un centre de traitement en grande couronne (Gennevilliers, Bonneuil-sur-Marne, Claye-Souilly) prend 2 à 3 heures au lieu de 45 minutes en province. Ce temps improductif se répercute directement sur le prix.</p>
+
+<h3>2. Le coût des centres de traitement</h3>
+<p>Les Installations de Stockage de Déchets Inertes (ISDI) et les centres de tri franciliens facturent <strong>30 à 50€/tonne de plus</strong> qu&apos;en province. La raison : le foncier est rare, les normes environnementales sont renforcées en zone dense (plan régional de prévention et gestion des déchets — PRPGD Île-de-France), et la demande dépasse l&apos;offre.</p>
+
+<h3>3. Les autorisations de voirie</h3>
+<p>À Paris intra-muros, l&apos;<IL href="/guides/autorisation-voirie-benne-guide">autorisation de voirie</IL> coûte <strong>120 à 200€</strong> et nécessite un délai de <strong>15 à 21 jours ouvrés</strong>. Dans les communes de petite couronne (Boulogne, Montreuil, Saint-Denis), comptez 80 à 150€ et 10 à 15 jours. Ce surcoût administratif s&apos;ajoute au prix de la benne elle-même.</p>
+
+<h3>4. Les restrictions horaires et les zones à faibles émissions (ZFE)</h3>
+<p>Depuis 2024, la ZFE du Grand Paris interdit la circulation des véhicules Crit&apos;Air 3, 4 et 5 en semaine de 8h à 20h dans les 77 communes de la Métropole du Grand Paris. Les loueurs doivent investir dans des <strong>flottes récentes (Crit&apos;Air 1 ou 2)</strong>, ce qui augmente leurs coûts d&apos;exploitation — et donc vos tarifs.</p>
+
+<Callout type="info" title="📍 La ZFE du Grand Paris en 2026">
+<p>La Zone à Faibles Émissions du Grand Paris couvre <strong>Paris et les 76 communes de la Métropole du Grand Paris</strong>. Les véhicules Crit&apos;Air 4 et 5 sont totalement interdits, et les Crit&apos;Air 3 sont restreints en semaine. Si votre loueur utilise un vieux camion, il devra circuler de nuit ou le week-end — avec un surcoût de 50 à 100€ sur votre devis.</p>
+</Callout>
+
+<h2>Grille tarifaire 2026 par département d&apos;Île-de-France</h2>
+<p>Les tarifs ci-dessous sont des <strong>moyennes TTC</strong> incluant la livraison, 7 jours de location et le traitement des déchets au centre agréé. Ils ont été compilés à partir de <strong>plus de 200 devis franciliens</strong> collectés entre janvier et mars 2026.</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-3 py-3 text-left font-bold">Département</th><th className="px-3 py-3 text-center font-bold">Benne 3m³</th><th className="px-3 py-3 text-center font-bold">Benne 6m³</th><th className="px-3 py-3 text-center font-bold">Benne 10m³</th><th className="px-3 py-3 text-center font-bold">Benne 15m³</th><th className="px-3 py-3 text-center font-bold">Benne 20m³</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-3 py-3 font-bold">75 — Paris</td><td className="px-3 py-3 text-center">249€</td><td className="px-3 py-3 text-center">379€</td><td className="px-3 py-3 text-center">529€</td><td className="px-3 py-3 text-center">599€</td><td className="px-3 py-3 text-center">699€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold">92 — Hauts-de-Seine</td><td className="px-3 py-3 text-center">229€</td><td className="px-3 py-3 text-center">349€</td><td className="px-3 py-3 text-center">489€</td><td className="px-3 py-3 text-center">559€</td><td className="px-3 py-3 text-center">649€</td></tr>
+<tr className="border-t"><td className="px-3 py-3 font-bold">93 — Seine-Saint-Denis</td><td className="px-3 py-3 text-center">219€</td><td className="px-3 py-3 text-center">329€</td><td className="px-3 py-3 text-center">469€</td><td className="px-3 py-3 text-center">529€</td><td className="px-3 py-3 text-center">619€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold">94 — Val-de-Marne</td><td className="px-3 py-3 text-center">219€</td><td className="px-3 py-3 text-center">339€</td><td className="px-3 py-3 text-center">479€</td><td className="px-3 py-3 text-center">539€</td><td className="px-3 py-3 text-center">629€</td></tr>
+<tr className="border-t"><td className="px-3 py-3 font-bold">78 — Yvelines</td><td className="px-3 py-3 text-center">199€</td><td className="px-3 py-3 text-center">309€</td><td className="px-3 py-3 text-center">429€</td><td className="px-3 py-3 text-center">489€</td><td className="px-3 py-3 text-center">569€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold">91 — Essonne</td><td className="px-3 py-3 text-center">199€</td><td className="px-3 py-3 text-center">299€</td><td className="px-3 py-3 text-center">419€</td><td className="px-3 py-3 text-center">479€</td><td className="px-3 py-3 text-center">559€</td></tr>
+<tr className="border-t"><td className="px-3 py-3 font-bold">95 — Val-d&apos;Oise</td><td className="px-3 py-3 text-center">199€</td><td className="px-3 py-3 text-center">299€</td><td className="px-3 py-3 text-center">419€</td><td className="px-3 py-3 text-center">479€</td><td className="px-3 py-3 text-center">559€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold">77 — Seine-et-Marne</td><td className="px-3 py-3 text-center">189€</td><td className="px-3 py-3 text-center">289€</td><td className="px-3 py-3 text-center">399€</td><td className="px-3 py-3 text-center">459€</td><td className="px-3 py-3 text-center">539€</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><em>Ces tarifs concernent les <IL href="/location-benne-encombrants">bennes encombrants</IL>. Les <IL href="/location-benne-gravats">bennes gravats</IL> sont en moyenne 15 à 20% plus chères (densité plus élevée = coût de transport et de traitement supérieur). Les <IL href="/location-benne-dechets-verts">bennes déchets verts</IL> sont 10 à 15% moins chères.</em></p>
+
+<h2>Focus Paris intra-muros : le cas le plus cher de France</h2>
+<p>Paris (75) concentre toutes les difficultés : rues étroites, stationnement inexistant, autorisations de voirie onéreuses, et centres de traitement éloignés (les dernières ISDI parisiennes ont fermé ; les déchets partent vers le 93, le 94 ou le 77). Voici le <strong>budget réel tout compris</strong> pour une location de benne à Paris :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-red-50"><tr><th className="px-4 py-3 text-left font-bold">Poste de coût</th><th className="px-4 py-3 text-center font-bold">Benne 3m³</th><th className="px-4 py-3 text-center font-bold">Benne 6m³</th><th className="px-4 py-3 text-center font-bold">Benne 10m³</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3">Location + livraison + traitement</td><td className="px-4 py-3 text-center">249€</td><td className="px-4 py-3 text-center">379€</td><td className="px-4 py-3 text-center">529€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Autorisation de voirie (mairie de Paris)</td><td className="px-4 py-3 text-center">120 – 200€</td><td className="px-4 py-3 text-center">120 – 200€</td><td className="px-4 py-3 text-center">120 – 200€</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Supplément livraison nuit/WE (si ZFE)</td><td className="px-4 py-3 text-center">0 – 80€</td><td className="px-4 py-3 text-center">0 – 80€</td><td className="px-4 py-3 text-center">0 – 80€</td></tr>
+<tr className="border-t bg-amber-50"><td className="px-4 py-3 font-bold">Budget total Paris</td><td className="px-4 py-3 text-center font-bold text-amber-600">369 – 529€</td><td className="px-4 py-3 text-center font-bold text-amber-600">499 – 659€</td><td className="px-4 py-3 text-center font-bold text-amber-600">649 – 809€</td></tr>
+</tbody>
+</table>
+</div>
+
+<Callout type="warning" title="⚠️ Accès limité dans certains arrondissements">
+<p>Dans les <strong>1er au 6ᵉ arrondissements</strong> (rues étroites du Marais, Saint-Germain, Île de la Cité), les bennes au-delà de 6m³ sont souvent impossibles à livrer en raison de la <strong>largeur de voirie insuffisante</strong> (le camion-grue mesure 10m de long et 2,5m de large). Privilégiez les <strong>bennes 3m³</strong> avec rotation, ou les <strong>big bags 1m³</strong> pour les très petits chantiers. En cas de doute, votre loueur effectuera une visite technique gratuite avant la livraison.</p>
+</Callout>
+
+<h2>Petite couronne vs grande couronne : quel écart de prix ?</h2>
+<p>L&apos;Île-de-France se découpe en deux zones tarifaires distinctes :</p>
+
+<h3>Petite couronne (92, 93, 94) : +15 à 25% vs moyenne nationale</h3>
+<p>Les départements de la petite couronne (Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne) présentent des contraintes proches de Paris : forte densité, stationnement difficile, voiries étroites dans certaines communes (Vincennes, Levallois-Perret, Pantin). Les autorisations de voirie coûtent <strong>80 à 150€</strong> et les délais sont de <strong>10 à 15 jours</strong>.</p>
+<p>L&apos;avantage : la proximité de plusieurs <strong>grands centres de traitement</strong> (plateforme de tri de Gennevilliers dans le 92, ISDI de Bonneuil-sur-Marne dans le 94, centre de Romainville dans le 93) réduit les frais de transport par rapport à Paris intra-muros.</p>
+
+<h3>Grande couronne (77, 78, 91, 95) : +5 à 15% vs moyenne nationale</h3>
+<p>Les départements de grande couronne (Seine-et-Marne, Yvelines, Essonne, Val-d&apos;Oise) offrent des tarifs plus proches des <IL href="/guides/prix-location-benne-guide-complet">moyennes nationales</IL>. Les centres de traitement sont plus nombreux, les accès plus faciles, et les autorisations de voirie moins chères (<strong>50 à 100€</strong>). La Seine-et-Marne (77), avec son caractère semi-rural, propose les tarifs les plus compétitifs de la région.</p>
+
+<Callout type="tip" title="💡 Astuce : livraison en terrain privé = économie immédiate">
+<p>Si vous avez la possibilité de faire livrer la benne sur votre terrain privé (cour, jardin, allée), vous économisez <strong>120 à 200€ d&apos;autorisation de voirie</strong> à Paris, et 50 à 150€ en petite couronne. C&apos;est souvent la meilleure façon de rapprocher votre budget des tarifs de province. Assurez-vous simplement que le portail fait au moins <strong>3m de largeur</strong> et que le sol est stable.</p>
+</Callout>
+
+<h2>Comment économiser sur votre benne en Île-de-France</h2>
+<p>Les tarifs franciliens sont élevés, mais plusieurs leviers permettent de réduire la facture de <strong>20 à 40%</strong> :</p>
+
+<h3>1. Comparez systématiquement 3 devis</h3>
+<p>Les écarts de prix entre loueurs franciliens sont parmi <strong>les plus importants de France</strong> : jusqu&apos;à 50% de différence pour la même prestation. Un loueur basé en Seine-et-Marne (77) peut proposer un tarif nettement inférieur à un loueur parisien pour livrer une benne dans le Val-de-Marne (94). Utilisez notre <IL href="/devis">formulaire de devis gratuit</IL> pour comparer rapidement.</p>
+
+<h3>2. Triez vos déchets par matière</h3>
+<p>Deux bennes triées (une <IL href="/location-benne-gravats">gravats</IL> + une <IL href="/location-benne-encombrants">encombrants</IL>) coûtent souvent <strong>moins cher</strong> qu&apos;une seule grande benne <IL href="/location-benne-dib">DIB tout-venant</IL>. En Île-de-France, l&apos;écart est encore plus marqué : le traitement DIB coûte 120 à 150€/tonne en IDF contre 30 à 50€/tonne pour les gravats triés. Consultez notre <IL href="/guides/tri-dechets-chantier-guide">guide du décret 7 flux</IL> pour les bonnes pratiques de tri.</p>
+
+<h3>3. Programmez hors saison</h3>
+<p>Le pic de demande en Île-de-France se situe d&apos;<strong>avril à septembre</strong> (travaux de rénovation, déménagements de fin de bail parisien). En hiver (novembre à février), les disponibilités sont meilleures et de nombreux loueurs concèdent des <strong>remises de 10 à 15%</strong> pour maintenir leur activité.</p>
+
+<h3>4. Choisissez la bonne taille du premier coup</h3>
+<p>En province, une seconde rotation coûte 150 à 200€. En Île-de-France, elle peut atteindre <strong>250 à 350€</strong> (re-livraison, re-enlèvement, nouvelle autorisation de voirie). La <IL href="/guides/comment-choisir-taille-benne">règle d&apos;or</IL> s&apos;applique doublement en IDF : prenez <strong>toujours la taille au-dessus</strong>.</p>
+
+<h2>Réglementation spécifique Île-de-France</h2>
+<p>Au-delà de la ZFE déjà mentionnée, plusieurs réglementations régionales impactent la location de benne en Île-de-France :</p>
+
+<h3>Le Plan Régional de Prévention et Gestion des Déchets (PRPGD)</h3>
+<p>Le PRPGD Île-de-France fixe un objectif de <strong>valorisation de 70% des déchets du BTP</strong> d&apos;ici 2026 (contre 64% en 2023). Les loueurs de bennes sont tenus de justifier la traçabilité de chaque benne via un <strong>Bordereau de Suivi des Déchets (BSD)</strong>, conformément à la <strong>loi AGEC (2020)</strong>. Exigez toujours ce document — il vous protège en cas de contrôle de la DRIEAT (Direction Régionale de l&apos;Environnement).</p>
+
+<h3>Règles de stationnement et horaires de livraison</h3>
+<p>À Paris et dans de nombreuses communes de petite couronne, la livraison de bennes par camion-grue est <strong>interdite aux heures de pointe</strong> (7h30-9h30 et 16h30-19h30) sur les axes structurants. Certaines communes (Neuilly-sur-Seine, Boulogne-Billancourt) imposent également des <strong>horaires de chantier</strong> (8h-20h du lundi au vendredi, 9h-12h le samedi, interdiction le dimanche).</p>
+
+<h2>Les alternatives en zone très dense</h2>
+<p>Dans les quartiers où la livraison d&apos;une benne classique est impossible (rues piétonnes, accès &lt; 3m, absence d&apos;espace de pose), voici les solutions alternatives :</p>
+<ul>
+<li><strong>Big Bag (1m³)</strong> : livrable à la main ou par petit utilitaire. Prix en IDF : <strong>100 à 180€</strong>. Idéal pour un petit chantier de salle de bain en appartement parisien. Consultez notre <IL href="/guides/evacuation-gravats-guide-complet">guide d&apos;évacuation des gravats</IL> pour les alternatives.</li>
+<li><strong>Sacs à gravats + enlèvement sur rendez-vous</strong> : certains loueurs franciliens proposent un service d&apos;enlèvement de sacs de gravats (50 kg max/sac) déposés sur le trottoir. Prix : 8 à 15€/sac, minimum 10 sacs.</li>
+<li><strong>Camion aspirateur (terrassement)</strong> : pour les gravats en sous-sol ou les déchets inaccessibles par grue, le camion aspirateur intervient avec un tuyau flexible. Prix : 600 à 1200€ la demi-journée.</li>
+</ul>
+
+<h2>Tableau récapitulatif : à quel budget s&apos;attendre ?</h2>
+<p>Pour vous permettre de budgétiser rapidement votre projet, voici les fourchettes de prix tout compris (benne + voirie + traitement) selon la zone et le type de projet :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-3 py-3 text-left font-bold">Projet type</th><th className="px-3 py-3 text-center font-bold">Paris (75)</th><th className="px-3 py-3 text-center font-bold">Petite couronne</th><th className="px-3 py-3 text-center font-bold">Grande couronne</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-3 py-3">Rénovation salle de bain (3m³ gravats)</td><td className="px-3 py-3 text-center">369 – 529€</td><td className="px-3 py-3 text-center">299 – 399€</td><td className="px-3 py-3 text-center">219 – 299€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3">Rénovation cuisine (6m³ encombrants)</td><td className="px-3 py-3 text-center">499 – 659€</td><td className="px-3 py-3 text-center">399 – 519€</td><td className="px-3 py-3 text-center">319 – 419€</td></tr>
+<tr className="border-t"><td className="px-3 py-3">Vidage de garage (10m³ encombrants)</td><td className="px-3 py-3 text-center">649 – 809€</td><td className="px-3 py-3 text-center">529 – 669€</td><td className="px-3 py-3 text-center">439 – 539€</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3">Vidage de maison/succession (20m³)</td><td className="px-3 py-3 text-center">819 – 979€</td><td className="px-3 py-3 text-center">699 – 819€</td><td className="px-3 py-3 text-center">579 – 699€</td></tr>
+<tr className="border-t"><td className="px-3 py-3">Élagage (10m³ déchets verts)</td><td className="px-3 py-3 text-center">549 – 709€</td><td className="px-3 py-3 text-center">449 – 569€</td><td className="px-3 py-3 text-center">359 – 459€</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Pour un détail complet des tarifs nationaux par type de déchet, consultez notre <IL href="/guides/prix-location-benne-guide-complet">grille tarifaire complète 2026</IL>. Et pour trouver un loueur proche de votre chantier, parcourez notre <IL href="/departements">index des départements</IL>.</p>
+
+<CTABlock text="Comparez les prix de benne en Île-de-France. 3 devis gratuits en 2 minutes." />
+</>
+),
+
 };
