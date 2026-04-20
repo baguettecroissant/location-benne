@@ -166,6 +166,20 @@ export const guides: GuideArticle[] = [
         readTime: 13,
         tags: ["prix benne Île-de-France", "location benne Paris", "tarif benne 92", "benne 93", "benne IDF"],
     },
+    {
+        slug: "location-benne-zone-rurale",
+        title: "Location de Benne en Zone Rurale : Prix, Délais et Solutions Adaptées",
+        metaTitle: "Location de Benne en Zone Rurale : Prix & Délais 2026",
+        metaDescription: "Louer une benne en zone rurale : surcoût de 20 à 40%, délais allongés, alternatives. Prix réels 2026, astuces pour économiser et comparatif des solutions.",
+        excerpt: "En zone rurale, la location de benne coûte 20 à 40% plus cher qu\u0027en ville. Découvrez les prix réels 2026, les délais de livraison et les astuces pour maîtriser votre budget.",
+        image: "/images/guides/location-benne-zone-rurale.png",
+        imageAlt: "Camion-benne livrant une benne jaune sur un chemin de campagne française avec village et champs en arrière-plan",
+        category: 'guide-pratique',
+        publishDate: "2026-04-20",
+        updatedDate: "2026-04-20",
+        readTime: 13,
+        tags: ["benne zone rurale", "location benne campagne", "prix benne rural", "délai benne", "benne isolée"],
+    },
 ];
 
 export function getGuideBySlug(slug: string): GuideArticle | undefined {

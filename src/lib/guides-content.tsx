@@ -1003,4 +1003,132 @@ Vous évacuez 95% du volume sans effort, et vous faites un seul trajet en déche
 </>
 ),
 
+// ═══════════════════════════════════════════════════════════════
+// ARTICLE 11 — LOCATION DE BENNE EN ZONE RURALE : PRIX ET DÉLAIS
+// ═══════════════════════════════════════════════════════════════
+"location-benne-zone-rurale": (
+<>
+<p>Rénovation d&apos;une longère, vidage d&apos;un corps de ferme, élagage d&apos;un grand terrain boisé : en zone rurale, les projets générateurs de déchets ne manquent pas. Pourtant, <strong>louer une benne à la campagne coûte en moyenne 20 à 40% plus cher qu&apos;en zone urbaine</strong>, avec des délais de livraison parfois doublés. Ce guide détaille les prix réels 2026, explique les surcoûts spécifiques au milieu rural et vous donne toutes les clés pour maîtriser votre budget.</p>
+
+<h2>Pourquoi la location de benne coûte plus cher en zone rurale</h2>
+<p>En ville, la concurrence entre loueurs tire les prix vers le bas et les centres de traitement sont proches. En zone rurale, la donne est différente. Trois facteurs structurels expliquent l&apos;écart de prix :</p>
+
+<h3>1. La distance aux centres de traitement</h3>
+<p>Les Installations de Stockage de Déchets Inertes (ISDI), les plateformes de compostage et les centres de tri sont majoritairement situés en périphérie des grandes agglomérations. En zone rurale, le camion-benne parcourt souvent <strong>40 à 80 km aller-retour</strong> entre le lieu de pose et le centre agréé, contre 10 à 20 km en ville. Ce surcoût de transport — carburant, péages, temps de conduite — se répercute directement sur votre devis.</p>
+
+<h3>2. Le faible nombre de loueurs locaux</h3>
+<p>Dans les zones urbaines denses, il est courant de trouver <strong>5 à 10 loueurs de bennes</strong> dans un rayon de 30 km. En zone rurale, ce chiffre tombe souvent à <strong>1 ou 2 prestataires</strong>. Moins de concurrence signifie moins de pression sur les prix. Les loueurs éloignés facturent en outre un <strong>supplément de déplacement de 30 à 80€</strong> pour couvrir leurs frais de route.</p>
+
+<h3>3. L&apos;accessibilité des chemins et terrains</h3>
+<p>Le camion-grue qui livre une benne mesure <strong>10m de long, 2,5m de large et pèse entre 15 et 26 tonnes</strong> en charge. En zone rurale, les routes communales étroites, les chemins non goudronnés et les ponts à tonnage limité peuvent rendre la livraison complexe, voire impossible sans repérage préalable. Certains loueurs facturent une <strong>visite technique de 50 à 100€</strong> pour valider l&apos;accessibilité.</p>
+
+<Callout type="info" title="📍 Les communes rurales en chiffres">
+<p>La France compte environ <strong>30 000 communes de moins de 2 000 habitants</strong>, soit 88% des communes. Près de <strong>22 millions de Français</strong> vivent en zone rurale ou périurbaine. La distance moyenne au centre de traitement des déchets le plus proche y est de <strong>25 à 45 km</strong>, contre 5 à 15 km en zone urbaine (source : ADEME, rapport 2024).</p>
+</Callout>
+
+<h2>Prix de location de benne en zone rurale : grille tarifaire 2026</h2>
+<p>Les tarifs ci-dessous sont des <strong>moyennes TTC</strong> constatées en zone rurale (communes de moins de 5 000 habitants, à plus de 30 km d&apos;une agglomération de 50 000 habitants). Ils incluent la livraison, 7 jours de location et le traitement des déchets au centre agréé :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-amber-50"><tr><th className="px-3 py-3 text-left font-bold">Volume</th><th className="px-3 py-3 text-center font-bold">Zone urbaine</th><th className="px-3 py-3 text-center font-bold">Zone rurale</th><th className="px-3 py-3 text-center font-bold">Surcoût moyen</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-3 py-3 font-bold text-amber-600">3m³</td><td className="px-3 py-3 text-center">149 – 179€</td><td className="px-3 py-3 text-center">199 – 249€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+30 à 40%</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold text-amber-600">6m³</td><td className="px-3 py-3 text-center">199 – 279€</td><td className="px-3 py-3 text-center">269 – 369€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+25 à 35%</td></tr>
+<tr className="border-t"><td className="px-3 py-3 font-bold text-amber-600">10m³</td><td className="px-3 py-3 text-center">269 – 399€</td><td className="px-3 py-3 text-center">349 – 499€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+20 à 30%</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold text-amber-600">15m³</td><td className="px-3 py-3 text-center">339 – 399€</td><td className="px-3 py-3 text-center">429 – 519€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+20 à 30%</td></tr>
+<tr className="border-t"><td className="px-3 py-3 font-bold text-amber-600">20m³</td><td className="px-3 py-3 text-center">399 – 449€</td><td className="px-3 py-3 text-center">499 – 599€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+20 à 30%</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-3 py-3 font-bold text-amber-600">30m³</td><td className="px-3 py-3 text-center">499 – 599€</td><td className="px-3 py-3 text-center">629 – 779€</td><td className="px-3 py-3 text-center font-semibold text-red-600">+25 à 30%</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><em>Ces tarifs concernent les <IL href="/location-benne-encombrants">bennes encombrants</IL>. Les <IL href="/location-benne-gravats">bennes gravats</IL> sont 15 à 20% plus chères en raison de la densité supérieure. Les <IL href="/location-benne-dechets-verts">bennes déchets verts</IL> sont 10 à 15% moins chères. Pour une grille complète tous types confondus, consultez notre <IL href="/guides/prix-location-benne-guide-complet">guide des prix 2026</IL>.</em></p>
+
+<h2>Délais de livraison en zone rurale</h2>
+<p>En zone urbaine, une benne est généralement livrée sous <strong>24 à 48 heures</strong> après validation du devis. En zone rurale, les délais sont significativement plus longs. Plusieurs facteurs entrent en jeu :</p>
+
+<div className="not-prose overflow-x-auto my-8">
+<table className="w-full bg-white border border-slate-200 rounded-2xl overflow-hidden text-sm">
+<thead className="bg-slate-50"><tr><th className="px-4 py-3 text-left font-bold">Situation</th><th className="px-4 py-3 text-center font-bold">Délai de livraison</th><th className="px-4 py-3 text-center font-bold">Délai d&apos;enlèvement</th></tr></thead>
+<tbody>
+<tr className="border-t"><td className="px-4 py-3">Zone urbaine (&gt;50 000 hab.)</td><td className="px-4 py-3 text-center font-semibold text-green-600">24 à 48h</td><td className="px-4 py-3 text-center">24 à 48h</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Zone périurbaine (5 000 – 50 000 hab.)</td><td className="px-4 py-3 text-center">48 à 72h</td><td className="px-4 py-3 text-center">48 à 72h</td></tr>
+<tr className="border-t"><td className="px-4 py-3">Zone rurale (&lt;5 000 hab., &lt;30 km d&apos;un centre)</td><td className="px-4 py-3 text-center">3 à 5 jours</td><td className="px-4 py-3 text-center">2 à 4 jours</td></tr>
+<tr className="border-t bg-slate-50"><td className="px-4 py-3">Zone rurale isolée (&lt;2 000 hab., &gt;50 km)</td><td className="px-4 py-3 text-center font-semibold text-red-600">5 à 10 jours</td><td className="px-4 py-3 text-center">3 à 7 jours</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>En zone très isolée (montagne, arrière-pays, bocage profond), certains loueurs ne livrent qu&apos;à <strong>jours fixes</strong> — par exemple le mardi et le vendredi uniquement — pour optimiser leurs tournées. Anticipez en commandant <strong>2 à 3 semaines à l&apos;avance</strong>, surtout en haute saison (avril à septembre).</p>
+
+<Callout type="warning" title="⚠️ Vérifiez l&apos;accessibilité avant de commander">
+<p>En zone rurale, l&apos;accès au terrain est le premier point à vérifier. Le camion-grue a besoin de :<br/>
+• Une voie d&apos;accès de <strong>3m de largeur minimum</strong> sur toute la longueur du trajet<br/>
+• Un sol porteur (pas de chemin de terre détrempé après la pluie)<br/>
+• Aucun obstacle aérien à moins de <strong>5m de hauteur</strong> (branches, fils électriques)<br/>
+• Un pont ou un passage à gué supportant <strong>au moins 19 tonnes</strong> (poids du camion à vide + benne)<br/>
+Si l&apos;accès est douteux, envoyez des photos de la route et du terrain au loueur avant de valider le devis.</p>
+</Callout>
+
+<h2>Les projets typiques en zone rurale</h2>
+<p>Les besoins en location de benne à la campagne diffèrent sensiblement de ceux en ville. Voici les projets les plus fréquents et les volumes associés :</p>
+
+<h3>Rénovation de maison ancienne ou de longère</h3>
+<p>Les maisons rurales à rénover génèrent des volumes importants : <strong>démolition de cloisons en pierre, dépose de toiture en ardoise ou en tuile, arrachage de planchers anciens</strong>. Comptez <strong>10 à 20m³ de gravats</strong> pour la rénovation complète d&apos;une longère de 120m². Privilégiez une <IL href="/location-benne-gravats">benne gravats 10m³</IL> avec rotation, ou deux bennes successives pour les gros chantiers. Consultez notre <IL href="/guides/comment-choisir-taille-benne">guide des tailles de bennes</IL> pour estimer votre volume précisément.</p>
+
+<h3>Vidage de corps de ferme ou succession rurale</h3>
+<p>Les successions en milieu rural impliquent souvent de vider une maison <strong>et</strong> ses dépendances : grange, remise, grenier, cave, atelier. Le volume total peut atteindre <strong>25 à 40m³</strong>. Notre conseil : commandez une <IL href="/location-benne-encombrants">benne encombrants 20 ou 30m³</IL> et prévoyez une seconde rotation si nécessaire. En zone rurale, les tarifs de rotation sont de <strong>180 à 250€</strong>.</p>
+
+<h3>Élagage et entretien de grands terrains</h3>
+<p>Les terrains ruraux sont souvent plus grands — 2 000 à 10 000m² — et génèrent des volumes considérables de <IL href="/location-benne-dechets-verts">déchets verts</IL>. Un élagage d&apos;arbres centenaires ou un défrichage de parcelle produit facilement <strong>15 à 30m³ de branchages</strong>. Rappel : le <IL href="/guides/dechets-verts-reglementation-brulage">brûlage est interdit</IL>, même en zone rurale, sous peine de <strong>450€ d&apos;amende</strong> (circulaire du 18/11/2011, renforcée par la loi Climat &amp; Résilience 2021).</p>
+
+<h3>Travaux agricoles et démolition de bâtiments</h3>
+<p>La démolition d&apos;un hangar agricole, d&apos;un appentis ou d&apos;un ancien poulailler en parpaings génère <strong>5 à 15m³ de gravats inertes</strong>. Attention : si la construction contient de l&apos;amiante (plaques de fibrociment fréquentes sur les bâtiments agricoles d&apos;avant 1997), un diagnostic amiante est <strong>obligatoire avant démolition</strong> (décret n° 2011-629). L&apos;amiante ne peut pas être mis en benne classique — une filière spécialisée est requise.</p>
+
+<Callout type="tip" title="💡 Regroupez vos besoins avec vos voisins">
+<p>En zone rurale, une astuce efficace pour réduire le surcoût de transport : <strong>organisez une commande groupée avec vos voisins</strong>. Si deux ou trois foyers commandent chacun une benne livrée le même jour dans le même hameau, le loueur peut mutualiser le déplacement du camion et accorder une <strong>réduction de 10 à 20%</strong> sur chaque devis. Certains loueurs proposent même des tarifs « multi-livraisons » sur une même commune.</p>
+</Callout>
+
+<h2>Alternatives à la benne classique en zone rurale isolée</h2>
+<p>Lorsque l&apos;accès au terrain est trop difficile pour un camion-grue, ou que le surcoût de livraison rend la benne classique prohibitive, plusieurs alternatives existent :</p>
+
+<h3>Le Big Bag (1m³) livrable en utilitaire</h3>
+<p>Le Big Bag est un gros sac en toile de <strong>1m³</strong>, livrable par petit utilitaire (pas besoin de camion-grue). Prix en zone rurale : <strong>100 à 180€</strong> (livraison + enlèvement + traitement). Idéal pour les petits chantiers (salle de bain, WC) ou les terrains inaccessibles en camion. Pour un comparatif complet, consultez notre <IL href="/guides/evacuation-gravats-guide-complet">guide d&apos;évacuation des gravats</IL>.</p>
+
+<h3>La remorque + déchetterie</h3>
+<p>Si vous disposez d&apos;une remorque, les allers-retours en déchetterie restent une option viable pour les <strong>volumes inférieurs à 3m³</strong>. Attention cependant : en zone rurale, la déchetterie la plus proche peut être à <strong>20 à 40 km</strong>, ce qui rend cette solution chronophage et coûteuse en carburant. Au-delà de 3 allers-retours, la benne devient plus économique. Consultez notre <IL href="/guides/dechetterie-ou-benne-comparatif">comparatif déchetterie vs benne</IL> pour faire le bon calcul.</p>
+
+<h3>Le loueur agricole local</h3>
+<p>Dans certaines zones rurales, des <strong>entreprises de travaux agricoles ou de terrassement</strong> proposent un service de location de benne en complément de leur activité principale. Leurs tarifs sont parfois plus compétitifs que ceux des loueurs spécialisés basés en ville, car ils n&apos;ont pas de frais de déplacement longue distance. Renseignez-vous auprès de la mairie ou de la chambre d&apos;agriculture de votre département.</p>
+
+<h2>5 astuces pour économiser en zone rurale</h2>
+<p>Malgré les surcoûts structurels, plusieurs leviers permettent de réduire significativement votre facture :</p>
+<ol>
+<li><strong>Comparez au moins 3 devis</strong> : les écarts de prix atteignent souvent <strong>40 à 60%</strong> en zone rurale. Utilisez notre <IL href="/devis">formulaire de devis gratuit</IL> pour recevoir des offres de loueurs qui couvrent votre commune.</li>
+<li><strong>Triez vos déchets</strong> : deux bennes mono-matériau (gravats + encombrants) coûtent souvent <strong>moins cher</strong> qu&apos;une seule benne <IL href="/location-benne-dib">DIB tout-venant</IL>. Le tri réduit les coûts de traitement de 30 à 50%. Reportez-vous au <IL href="/guides/tri-dechets-chantier-guide">guide du décret 7 flux</IL>.</li>
+<li><strong>Commandez hors saison</strong> : de <strong>novembre à février</strong>, les loueurs ruraux tournent à 30-50% de leur capacité. Négociez une remise de 10 à 15% ou une livraison gratuite.</li>
+<li><strong>Mutualisez avec les voisins</strong> : plusieurs livraisons dans le même secteur le même jour = réduction du surcoût de transport pour chacun.</li>
+<li><strong>Broyez vos déchets verts</strong> : un broyeur de végétaux (location ~80€/jour) réduit le volume de branches de <strong>50 à 70%</strong>. Un élagage de 20m³ tient alors dans une benne 10m³.</li>
+</ol>
+
+<h2>Autorisation de voirie en zone rurale : une formalité simplifiée</h2>
+<p>Bonne nouvelle pour les habitants de zones rurales : l&apos;<IL href="/guides/autorisation-voirie-benne-guide">autorisation de voirie</IL> est souvent <strong>plus simple et moins chère</strong> qu&apos;en ville. Dans les communes de moins de 5 000 habitants, le délai d&apos;obtention est de <strong>3 à 7 jours seulement</strong> et le coût est de <strong>30 à 50€</strong>, contre 80 à 200€ dans les grandes agglomérations.</p>
+<p>Mieux encore : en zone rurale, la plupart des propriétaires disposent d&apos;un <strong>terrain privé</strong> (cour, chemin, pré) suffisamment grand pour poser la benne sans occuper la voie publique. Dans ce cas, <strong>aucune autorisation n&apos;est nécessaire</strong> — c&apos;est un avantage majeur par rapport aux zones urbaines denses.</p>
+
+<Callout type="info" title="🏡 Terrain privé : les précautions à prendre">
+<p>Même sur votre propre terrain, quelques précautions s&apos;imposent pour la pose d&apos;une benne :<br/>
+• <strong>Sol stable</strong> : évitez la pelouse détrempée ou le terrain meuble. Privilégiez le gravier, le béton ou le bitume. Si nécessaire, posez des planches de répartition sous les patins de la benne.<br/>
+• <strong>Pente</strong> : la benne doit être posée sur un sol <strong>plat ou à très faible pente</strong> (&lt;5%). Sur un terrain en pente, elle risque de glisser une fois chargée.<br/>
+• <strong>Distance à la route</strong> : la benne doit rester accessible au camion-grue pour l&apos;enlèvement. Ne la posez pas au fond du jardin si le camion ne peut pas y accéder.</p>
+</Callout>
+
+<h2>Location de benne en zone rurale : ce qu&apos;il faut retenir</h2>
+<p>La location de benne en zone rurale présente des contraintes spécifiques — <strong>surcoût de 20 à 40%</strong>, délais de livraison allongés à <strong>3 à 10 jours</strong>, et accessibilité parfois limitée — mais elle reste la solution la plus pratique pour évacuer de gros volumes de déchets à la campagne. En anticipant votre commande, en triant vos déchets et en comparant systématiquement plusieurs devis, vous pouvez <strong>réduire la facture de 20 à 40%</strong>.</p>
+<p>Que vous rénoviez une maison de campagne, vidiez une succession ou entreteniez un grand terrain, la benne vous évite des dizaines d&apos;allers-retours en déchetterie et vous garantit une <strong>traçabilité réglementaire</strong> conforme à la loi AGEC (2020). Consultez les <IL href="/departements">loueurs disponibles dans votre département</IL> et comparez les offres pour trouver le meilleur prix.</p>
+
+<CTABlock text="En zone rurale ? Comparez les prix de benne dans votre commune. Devis gratuit en 2 minutes." />
+</>
+),
+
 };
