@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // ─────────────────────────────────────────────────────────────────────
 // ViteUnDevis API v1.5 Integration — Ping Cascade + Lead Submission
+// + Supabase backup + Email notification
 // Doc: https://www.viteundevis.com/api/VUD-API-1.5.pdf
 // ─────────────────────────────────────────────────────────────────────
 
@@ -12,6 +13,14 @@ const VUD_PING_URL = "https://www.viteundevis.com/api/ping.php";
 // Test: https://www.viteundevis.com/api/get.php?test=1
 // Production: https://www.viteundevis.com/api/get.php
 const VUD_API_URL = "https://www.viteundevis.com/api/get.php";
+
+// Supabase — stockage de tous les leads
+const SUPABASE_URL = "https://nhmvgsrwhjsjnpncpiaj.supabase.co";
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+
+// Resend — notification email (free: 100/jour)
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
+const NOTIFICATION_EMAIL = "wade.profession@gmail.com";
 
 // Catégories candidates pour "Location de benne / Évacuation de gravats"
 // Ordre de priorité par pertinence métier
@@ -337,6 +346,60 @@ export async function POST(request: NextRequest) {
             console.error("VUD API errors:", vudResponse.code_retour);
         }
 
+        // ── SAUVEGARDE SUPABASE + EMAIL (en parallèle, non bloquant) ──
+        const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "";
+        const ua = request.headers.get("user-agent") || "";
+
+        // Fire-and-forget : on n'attend pas pour répondre au client
+        Promise.allSettled([
+            saveLeadToSupabase({
+                nom: nomFamille,
+                prenom,
+                email,
+                telephone,
+                adresse: adresse || "",
+                ville,
+                code_postal,
+                departement: departement || "",
+                profil,
+                entreprise: entreprise || "",
+                volume,
+                type_dechet,
+                date_livraison: date_livraison || "",
+                date_retrait: date_retrait || "",
+                message: message || "",
+                vud_category: catName,
+                vud_category_id: catId,
+                vud_devis_id: devisId,
+                vud_devis_hash: devisHash,
+                vud_accepted: isSuccess,
+                vud_cpl: Number(best?.ping.cpl) || 0,
+                vud_ecpl: Number(best?.ping.ecpl) || 0,
+                vud_errors: isSuccess ? null : vudResponse?.code_retour || null,
+                ip_address: ip,
+                user_agent: ua,
+            }),
+            sendEmailNotification({
+                nom: `${prenom} ${nomFamille}`,
+                email,
+                telephone,
+                adresse: adresse || ville,
+                ville,
+                code_postal,
+                profil,
+                entreprise: entreprise || "",
+                volume,
+                type_dechet,
+                date_livraison: date_livraison || "",
+                date_retrait: date_retrait || "",
+                message: message || "",
+                vud_category: catName,
+                vud_accepted: isSuccess,
+                vud_cpl: best?.ping.cpl?.toString() || "0",
+                devis_id: devisId,
+            }),
+        ]).catch((err) => console.error("Background tasks error:", err));
+
         return NextResponse.json({
             success: true,
             vud_accepted: isSuccess,
@@ -357,5 +420,121 @@ export async function POST(request: NextRequest) {
             { success: false, error: "Erreur serveur" },
             { status: 500 }
         );
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SUPABASE — Sauvegarde de chaque lead
+// ═══════════════════════════════════════════════════════════════
+
+async function saveLeadToSupabase(lead: Record<string, unknown>) {
+    if (!SUPABASE_SERVICE_KEY) {
+        console.warn("SUPABASE_SERVICE_ROLE_KEY not set — lead not saved to DB");
+        return;
+    }
+
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/benne_leads`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                apikey: SUPABASE_SERVICE_KEY,
+                Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
+                Prefer: "return=minimal",
+            },
+            body: JSON.stringify(lead),
+        });
+
+        if (!res.ok) {
+            const text = await res.text();
+            console.error("Supabase insert error:", res.status, text);
+        }
+    } catch (err) {
+        console.error("Supabase save failed:", err);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EMAIL — Notification à chaque nouveau lead
+// Via Resend (gratuit 100 emails/jour)
+// ═══════════════════════════════════════════════════════════════
+
+interface EmailLeadData {
+    nom: string;
+    email: string;
+    telephone: string;
+    adresse: string;
+    ville: string;
+    code_postal: string;
+    profil: string;
+    entreprise: string;
+    volume: string;
+    type_dechet: string;
+    date_livraison: string;
+    date_retrait: string;
+    message: string;
+    vud_category: string;
+    vud_accepted: boolean;
+    vud_cpl: string;
+    devis_id: string | null;
+}
+
+async function sendEmailNotification(lead: EmailLeadData) {
+    if (!RESEND_API_KEY) {
+        console.warn("RESEND_API_KEY not set — email notification skipped");
+        return;
+    }
+
+    const statusEmoji = lead.vud_accepted ? "✅" : "⚠️";
+    const statusText = lead.vud_accepted ? "Accepté par ViteUnDevis" : "Non accepté (envoyé quand même)";
+
+    const htmlBody = `
+        <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+            <div style="background:#f59e0b;color:white;padding:16px 24px;border-radius:12px 12px 0 0;">
+                <h2 style="margin:0;">🏗️ Nouveau lead Location de Benne</h2>
+                <p style="margin:4px 0 0;opacity:0.9;font-size:14px;">${statusEmoji} ${statusText}</p>
+            </div>
+            <div style="background:#f8fafc;padding:24px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px;">
+                <table style="width:100%;font-size:14px;border-collapse:collapse;">
+                    <tr><td style="padding:8px 0;color:#64748b;width:140px;">👤 Nom</td><td style="padding:8px 0;font-weight:bold;">${lead.nom}</td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">📞 Téléphone</td><td style="padding:8px 0;font-weight:bold;"><a href="tel:${lead.telephone}">${lead.telephone}</a></td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">✉️ Email</td><td style="padding:8px 0;"><a href="mailto:${lead.email}">${lead.email}</a></td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">📍 Adresse</td><td style="padding:8px 0;">${lead.adresse}</td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">🏙️ Ville</td><td style="padding:8px 0;font-weight:bold;">${lead.ville} (${lead.code_postal})</td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">👔 Profil</td><td style="padding:8px 0;">${lead.profil}${lead.entreprise ? ` — ${lead.entreprise}` : ""}</td></tr>
+                    <tr style="border-top:1px solid #e2e8f0;"><td style="padding:8px 0;color:#64748b;">📦 Volume</td><td style="padding:8px 0;font-weight:bold;color:#f59e0b;">${lead.volume}</td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">🪨 Type déchet</td><td style="padding:8px 0;">${lead.type_dechet}</td></tr>
+                    ${lead.date_livraison ? `<tr><td style="padding:8px 0;color:#64748b;">📅 Livraison</td><td style="padding:8px 0;">${lead.date_livraison}</td></tr>` : ""}
+                    ${lead.date_retrait ? `<tr><td style="padding:8px 0;color:#64748b;">📅 Retrait</td><td style="padding:8px 0;">${lead.date_retrait}</td></tr>` : ""}
+                    ${lead.message ? `<tr style="border-top:1px solid #e2e8f0;"><td style="padding:8px 0;color:#64748b;">💬 Message</td><td style="padding:8px 0;">${lead.message}</td></tr>` : ""}
+                    <tr style="border-top:2px solid #e2e8f0;"><td style="padding:8px 0;color:#64748b;">🏷️ Catégorie VUD</td><td style="padding:8px 0;">${lead.vud_category}</td></tr>
+                    <tr><td style="padding:8px 0;color:#64748b;">💰 CPL</td><td style="padding:8px 0;font-weight:bold;color:#16a34a;">${lead.vud_cpl}€</td></tr>
+                    ${lead.devis_id ? `<tr><td style="padding:8px 0;color:#64748b;">🆔 Devis ID</td><td style="padding:8px 0;font-family:monospace;">${lead.devis_id}</td></tr>` : ""}
+                </table>
+            </div>
+        </div>
+    `;
+
+    try {
+        const res = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+                from: "Location Benne <leads@prix-location-benne.fr>",
+                to: [NOTIFICATION_EMAIL],
+                subject: `${statusEmoji} Lead Benne ${lead.volume} — ${lead.ville} (${lead.code_postal}) — ${lead.nom}`,
+                html: htmlBody,
+            }),
+        });
+
+        if (!res.ok) {
+            const text = await res.text();
+            console.error("Resend email error:", res.status, text);
+        }
+    } catch (err) {
+        console.error("Email notification failed:", err);
     }
 }
