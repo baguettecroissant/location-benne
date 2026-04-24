@@ -17,6 +17,14 @@ interface SelectedCity {
 type ProfileType = "particulier" | "professionnel";
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
+interface VudResponse {
+    devis_id?: string | null;
+    devis_hash?: string | null;
+    category?: string;
+    cpl?: string;
+    accepted?: boolean;
+}
+
 export default function DevisPage() {
     const [step, setStep] = useState(1);
     const [profile, setProfile] = useState<ProfileType>("particulier");
@@ -24,6 +32,7 @@ export default function DevisPage() {
     const [wasteType, setWasteType] = useState("");
     const [formStatus, setFormStatus] = useState<FormStatus>("idle");
     const [selectedCity, setSelectedCity] = useState<SelectedCity | null>(null);
+    const [vudData, setVudData] = useState<VudResponse | null>(null);
 
     function handleNextStep() {
         if (!selectedCity) {
@@ -43,17 +52,45 @@ export default function DevisPage() {
         setFormStatus("submitting");
 
         const formData = new FormData(e.currentTarget);
-        formData.set("profil", profile);
-        formData.set("volume", selectedVolume);
-        formData.set("type_dechet", wasteType);
+
+        // Build JSON payload for our API route
+        const payload = {
+            nom: formData.get("nom") as string,
+            telephone: formData.get("telephone") as string,
+            email: formData.get("email") as string,
+            profil: profile,
+            volume: selectedVolume,
+            type_dechet: wasteType,
+            ville: selectedCity?.name || "",
+            code_postal: selectedCity?.zip || "",
+            departement: selectedCity?.department_name || "",
+            message: formData.get("message") as string || "",
+            date_livraison: formData.get("date_livraison") as string || "",
+            date_retrait: formData.get("date_retrait") as string || "",
+            entreprise: formData.get("entreprise") as string || "",
+            adresse: formData.get("adresse") as string || "",
+        };
 
         try {
-            const res = await fetch("https://formspree.io/f/xlgpqqgr", {
+            const res = await fetch("/api/submit-lead", {
                 method: "POST",
-                body: formData,
-                headers: { Accept: "application/json" },
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
-            setFormStatus(res.ok ? "success" : "error");
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+                setVudData({
+                    devis_id: data.devis_id,
+                    devis_hash: data.devis_hash,
+                    category: data.category,
+                    cpl: data.cpl,
+                    accepted: data.accepted,
+                });
+                setFormStatus("success");
+            } else {
+                setFormStatus("error");
+            }
         } catch {
             setFormStatus("error");
         }
@@ -71,6 +108,27 @@ export default function DevisPage() {
                         <p className="text-lg text-slate-600 mb-8">
                             Votre demande de devis a bien été transmise. Nous vous recontactons sous 2h avec les tarifs des loueurs de votre zone.
                         </p>
+
+                        {/* ViteUnDevis Spinner — Validation SMS */}
+                        {vudData?.devis_id && vudData?.devis_hash && (
+                            <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                                <div id="vud_spin_328400"></div>
+                                <script
+                                    dangerouslySetInnerHTML={{
+                                        __html: `
+                                            (function() {
+                                                var vud_js = document.createElement('script');
+                                                vud_js.type = 'text/javascript';
+                                                vud_js.src = 'https://www.viteundevis.com/mb/spinner.php?devis_id=${vudData.devis_id}&devis_hash=${vudData.devis_hash}&box=328400';
+                                                var s = document.getElementsByTagName('script')[0];
+                                                s.parentNode.insertBefore(vud_js, s);
+                                            })();
+                                        `,
+                                    }}
+                                />
+                            </div>
+                        )}
+
                         <div className="space-y-4">
                             <Link href="/"><Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-6 rounded-xl">Retour à l&apos;accueil</Button></Link>
                             <p className="text-sm text-slate-400">En attendant, consultez nos <Link href="/guides" className="text-amber-600 font-semibold hover:underline">guides pratiques</Link></p>
@@ -293,6 +351,12 @@ export default function DevisPage() {
                                             <div>
                                                 <label className="block text-sm font-semibold text-slate-700 mb-2">Email *</label>
                                                 <input type="email" name="email" required placeholder="jean.dupont@email.com" className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" />
+                                            </div>
+
+                                            {/* ADRESSE */}
+                                            <div>
+                                                <label className="block text-sm font-semibold text-slate-700 mb-2">Adresse *</label>
+                                                <input type="text" name="adresse" required placeholder="5 rue de la République" className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" />
                                             </div>
 
                                             {/* ENTREPRISE (pro only) */}
