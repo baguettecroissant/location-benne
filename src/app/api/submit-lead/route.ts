@@ -345,12 +345,12 @@ export async function POST(request: NextRequest) {
             console.error("VUD API errors:", vudResponse.code_retour);
         }
 
-        // ── SAUVEGARDE SUPABASE + EMAIL (en parallèle, non bloquant) ──
+        // ── SAUVEGARDE SUPABASE + EMAIL (await before response — Vercel kills unawaited promises) ──
         const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "";
         const ua = request.headers.get("user-agent") || "";
 
-        // Fire-and-forget : on n'attend pas pour répondre au client
-        Promise.allSettled([
+        // On DOIT await sinon Vercel serverless tue le process avant l'insert
+        const saveResults = await Promise.allSettled([
             // 1. Table détaillée benne_leads (données complètes du formulaire)
             saveLeadToSupabase("benne_leads", {
                 nom: nomFamille,
@@ -393,7 +393,14 @@ export async function POST(request: NextRequest) {
                 is_resold: false,
                 notes: `${type_dechet} — ${ville} (${code_postal}) — ${prenom} ${nomFamille} — ${telephone}`,
             }),
-        ]).catch((err) => console.error("Background tasks error:", err));
+        ]);
+
+        // Log any save failures for debugging
+        saveResults.forEach((r, i) => {
+            if (r.status === "rejected") {
+                console.error(`Supabase save #${i} rejected:`, r.reason);
+            }
+        });
 
         return NextResponse.json({
             success: true,
