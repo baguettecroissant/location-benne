@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         phone,
         siret: siret || null,
         departments,
-        credits: 1, // 1 crédit offert
+        credits: 0, // pas de crédit offert — achat obligatoire
       })
       .select()
       .single()
