@@ -47,12 +47,13 @@ export default function DashboardPage() {
       if (!pro) { router.push('/pro/inscription'); return }
       setProfile(pro)
 
-      // Charger les leads récents via l'API
-      const res = await fetch('/api/pro/leads?page=1')
+      // Charger les leads récents FILTRÉS par mes départements
+      const deptParam = pro.departments?.length ? `&departments=${pro.departments.join(',')}` : ''
+      const res = await fetch(`/api/pro/leads?page=1${deptParam}`)
       if (res.ok) {
         const data = await res.json()
         setRecentLeads(data.leads?.slice(0, 5) || [])
-        setAvailableCount(data.leads?.filter((l: Lead) => l._status === 'available').length || 0)
+        setAvailableCount(data.total || 0)
       }
 
       setLoading(false)

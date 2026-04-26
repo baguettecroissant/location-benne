@@ -57,6 +57,7 @@ export default function InscriptionPage() {
         password: form.password,
         options: {
           data: { company_name: form.company_name, is_pro: true, first_name: form.first_name, last_name: form.last_name },
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/pro/connexion`,
         },
       })
 
