@@ -247,6 +247,18 @@ export async function POST(request: NextRequest) {
             volume, type_dechet, profil, ville, message,
         });
 
+        // Description détaillée du lead
+        const leadDescription = [
+            `Location de benne ${volume} — ${type_dechet}`,
+            `Profil: ${profil}${entreprise ? ` (${entreprise})` : ""}`,
+            `Lieu: ${ville} (${code_postal}) — ${departement}`,
+            date_livraison ? `Livraison souhaitée: ${date_livraison}` : "",
+            date_retrait ? `Retrait souhaité: ${date_retrait}` : "",
+            message ? `Précisions: ${message}` : "",
+        ]
+            .filter(Boolean)
+            .join("\n");
+
         // ══════════════════════════════════════════════════════
         // ⚠️ ViteUnDevis DÉSACTIVÉ — en observation
         // Les leads sont collectés sur Supabase + PimpSEO uniquement
