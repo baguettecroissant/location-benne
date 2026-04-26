@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { createServerSupabase } from '@/lib/supabase/server'
 
 // POST /api/pro/purchase — Acheter un lead avec des crédits
+// Utilise une fonction Postgres atomique pour éviter les race conditions
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createServerSupabase()
@@ -21,74 +22,36 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'lead_id requis' }, { status: 400 })
     }
 
-    // Vérifier le profil pro et les crédits
-    const { data: pro } = await admin
-      .from('pro_profiles')
-      .select('id, credits, total_purchased')
-      .eq('id', user.id)
-      .single()
+    // Appeler la fonction atomique Postgres
+    const { data, error } = await admin.rpc('purchase_lead', {
+      p_pro_id: user.id,
+      p_lead_id: lead_id,
+    })
 
-    if (!pro) {
-      return NextResponse.json({ error: 'Profil pro introuvable' }, { status: 403 })
+    if (error) {
+      console.error('Purchase RPC error:', error)
+      return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
     }
 
-    if (pro.credits < 1) {
-      return NextResponse.json({ error: 'Crédits insuffisants. Rechargez votre compte.' }, { status: 402 })
+    const result = data as { success: boolean; error?: string; credits_remaining?: number; lead?: Record<string, unknown> }
+
+    if (!result.success) {
+      const statusMap: Record<string, number> = {
+        'Crédits insuffisants': 402,
+        'Lead indisponible ou déjà vendu': 409,
+        'Profil pro introuvable': 403,
+      }
+      return NextResponse.json(
+        { error: result.error },
+        { status: statusMap[result.error || ''] || 400 }
+      )
     }
 
-    // Vérifier que le lead existe et n'est pas déjà vendu
-    const { data: lead } = await admin
-      .from('benne_leads')
-      .select('*')
-      .eq('id', lead_id)
-      .eq('is_sold', false)
-      .eq('marketplace_visible', true)
-      .single()
-
-    if (!lead) {
-      return NextResponse.json({ error: 'Lead indisponible ou déjà vendu' }, { status: 409 })
-    }
-
-    // Transaction : acheter le lead
-    // 1. Créer l'achat
-    const { error: purchaseError } = await admin
-      .from('lead_purchases')
-      .insert({
-        pro_id: user.id,
-        lead_id: lead_id,
-        amount: 20,
-        payment_method: 'credits',
-      })
-
-    if (purchaseError) {
-      // Probablement déjà vendu (UNIQUE constraint)
-      return NextResponse.json({ error: 'Ce lead a déjà été acheté' }, { status: 409 })
-    }
-
-    // 2. Marquer le lead comme vendu
-    await admin
-      .from('benne_leads')
-      .update({
-        is_sold: true,
-        sold_to: user.id,
-        sold_at: new Date().toISOString(),
-      })
-      .eq('id', lead_id)
-
-    // 3. Décrémenter les crédits
-    await admin
-      .from('pro_profiles')
-      .update({
-        credits: pro.credits - 1,
-        total_purchased: pro.total_purchased + 1,
-      })
-      .eq('id', user.id)
-
-    // Retourner le lead complet (toutes les coordonnées)
+    // Retourner le lead complet avec toutes les coordonnées
     return NextResponse.json({
       success: true,
-      lead: { ...lead, _status: 'owned' },
-      credits_remaining: pro.credits - 1,
+      lead: { ...result.lead, _status: 'owned' },
+      credits_remaining: result.credits_remaining,
     })
   } catch (err) {
     console.error('Purchase API error:', err)

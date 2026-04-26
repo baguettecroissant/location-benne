@@ -47,6 +47,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Paiement non complété' }, { status: 400 })
     }
 
+    // Vérifier le montant et la devise capturés (anti-fraude)
+    const capturedAmount = capture.purchase_units?.[0]?.payments?.captures?.[0]?.amount
+    if (capturedAmount) {
+      const EXPECTED_AMOUNTS: Record<string, number> = {
+        single: 20, pack5: 85, pack10: 150,
+      }
+      const currency = capturedAmount.currency_code
+      if (currency !== 'EUR') {
+        console.error(`PayPal fraud: devise ${currency} au lieu de EUR — order ${order_id}`)
+        return NextResponse.json({ error: 'Devise invalide' }, { status: 400 })
+      }
+    }
+
     const admin = createAdminClient()
 
     // Trouver la commande de crédits correspondante
@@ -63,6 +76,15 @@ export async function POST(req: NextRequest) {
 
     if (creditPurchase.paypal_status === 'COMPLETED') {
       return NextResponse.json({ error: 'Commande déjà traitée' }, { status: 409 })
+    }
+
+    // Vérifier que le montant capturé correspond au pack (anti-fraude)
+    if (capturedAmount) {
+      const paidAmount = parseFloat(capturedAmount.value)
+      if (Math.abs(paidAmount - creditPurchase.amount) > 0.01) {
+        console.error(`PayPal fraud: montant ${paidAmount}€ au lieu de ${creditPurchase.amount}€ — order ${order_id}`)
+        return NextResponse.json({ error: 'Montant incorrect' }, { status: 400 })
+      }
     }
 
     // Mettre à jour le statut de la commande
