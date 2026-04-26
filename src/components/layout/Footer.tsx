@@ -82,8 +82,11 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-slate-800 pt-8 text-center text-sm text-slate-600">
-                    © {new Date().getFullYear()} Prix-Location-Benne.fr - Tous droits réservés.
+                <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-600">
+                    <span>© {new Date().getFullYear()} Prix-Location-Benne.fr - Tous droits réservés.</span>
+                    <Link href="/pro" className="text-slate-600 hover:text-amber-400 transition-colors text-xs">
+                        Espace Professionnel →
+                    </Link>
                 </div>
             </div>
         </footer>

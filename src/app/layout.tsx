@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
+import { LayoutHeader, LayoutFooter } from "@/components/layout/ClientLayoutElements";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -79,10 +80,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <Header />
+        <LayoutHeader header={<Header />} />
         <main className="flex-1">{children}</main>
-        <Footer />
-        <StickyMobileCTA />
+        <LayoutFooter footer={<Footer />} cta={<StickyMobileCTA />} />
         <Script
           defer
           src="https://cloud.umami.is/script.js"

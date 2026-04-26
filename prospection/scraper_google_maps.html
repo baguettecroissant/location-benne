@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🚛 Scraper Google Maps — Location de Benne</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; padding: 40px; }
+        h1 { font-size: 28px; margin-bottom: 10px; color: #f59e0b; }
+        .subtitle { color: #94a3b8; margin-bottom: 30px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        .step { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .step h2 { color: #f59e0b; font-size: 18px; margin-bottom: 12px; }
+        .step p { color: #cbd5e1; line-height: 1.7; }
+        .step code { background: #334155; padding: 2px 8px; border-radius: 6px; color: #fbbf24; font-size: 14px; }
+        
+        .search-list { margin-top: 16px; }
+        .search-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #0f172a; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; border: 1px solid #334155; }
+        .search-item:hover { border-color: #f59e0b; background: #1a2332; }
+        .search-item a { color: #60a5fa; text-decoration: none; font-weight: 600; flex: 1; }
+        .search-item a:hover { text-decoration: underline; }
+        .search-item .dept { color: #94a3b8; font-size: 13px; min-width: 60px; }
+        .search-item .status { font-size: 12px; color: #4ade80; }
+        
+        .export-area { margin-top: 30px; }
+        textarea { width: 100%; height: 200px; background: #1e293b; border: 2px solid #334155; border-radius: 12px; color: #e2e8f0; padding: 16px; font-family: monospace; font-size: 13px; resize: vertical; }
+        textarea:focus { border-color: #f59e0b; outline: none; }
+        
+        button { background: #f59e0b; color: #0f172a; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 12px; transition: all 0.2s; }
+        button:hover { background: #fbbf24; transform: translateY(-1px); }
+        
+        .instructions { background: #1e3a2f; border: 1px solid #166534; border-radius: 12px; padding: 20px; margin-bottom: 30px; }
+        .instructions h3 { color: #4ade80; margin-bottom: 8px; }
+        .instructions ol { padding-left: 20px; }
+        .instructions li { margin-bottom: 8px; color: #a7f3d0; line-height: 1.5; }
+        
+        .counter { display: inline-flex; align-items: center; gap: 8px; background: #1e293b; padding: 8px 16px; border-radius: 20px; font-weight: 600; color: #f59e0b; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🚛 Scraper Google Maps — Location de Benne</h1>
+    <p class="subtitle">Méthode gratuite et infaillible pour récupérer les contacts des loueurs de benne</p>
+    
+    <div class="instructions">
+        <h3>📋 Mode d'emploi (5 minutes par département)</h3>
+        <ol>
+            <li><strong>Cliquez sur un lien</strong> ci-dessous → ça ouvre Google Maps avec la recherche pré-remplie</li>
+            <li>Sur Google Maps, <strong>scrollez les résultats</strong> à gauche pour voir tous les loueurs</li>
+            <li>Pour chaque loueur, cliquez sur sa fiche et <strong>copiez</strong> : Nom, Téléphone, Email (si visible)</li>
+            <li><strong>Collez les données</strong> dans la zone texte en bas (format libre, on nettoiera après)</li>
+            <li>Quand vous avez fini, cliquez <strong>"Télécharger le CSV"</strong></li>
+        </ol>
+    </div>
+    
+    <div class="counter" id="counter">📊 0 prospects collectés</div>
+
+    <h2 style="color: #e2e8f0; margin-bottom: 16px;">🔗 Recherches pré-remplies par département</h2>
+    <p style="color: #94a3b8; margin-bottom: 16px;">Cliquez sur chaque lien pour ouvrir Google Maps. Commencez par les plus gros départements :</p>
+    
+    <div class="search-list" id="searchList"></div>
+    
+    <div class="export-area">
+        <h2 style="color: #e2e8f0; margin: 30px 0 16px;">📝 Collez vos données ici</h2>
+        <p style="color: #94a3b8; margin-bottom: 12px;">Format suggéré : <code>Entreprise | Téléphone | Email | Ville</code> (un par ligne)</p>
+        <textarea id="dataArea" placeholder="Benne Express | 06 12 34 56 78 | contact@benne-express.fr | Lyon&#10;Gravats Service | 04 78 99 88 77 | | Villeurbanne&#10;..."></textarea>
+        
+        <div style="display: flex; gap: 12px; margin-top: 12px;">
+            <button onclick="downloadCSV()">📥 Télécharger le CSV</button>
+            <button onclick="copyForSheet()" style="background: #3b82f6;">📋 Copier pour Google Sheet</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const departments = [
+    { code: "75", name: "Paris", priority: "🔥" },
+    { code: "69", name: "Lyon", priority: "🔥" },
+    { code: "13", name: "Marseille", priority: "🔥" },
+    { code: "59", name: "Lille", priority: "🔥" },
+    { code: "33", name: "Bordeaux", priority: "🔥" },
+    { code: "31", name: "Toulouse", priority: "🔥" },
+    { code: "44", name: "Nantes", priority: "🔥" },
+    { code: "06", name: "Nice", priority: "🔥" },
+    { code: "34", name: "Montpellier", priority: "🔥" },
+    { code: "67", name: "Strasbourg", priority: "🔥" },
+    { code: "35", name: "Rennes", priority: "⭐" },
+    { code: "38", name: "Grenoble", priority: "⭐" },
+    { code: "76", name: "Rouen", priority: "⭐" },
+    { code: "83", name: "Toulon", priority: "⭐" },
+    { code: "57", name: "Metz", priority: "⭐" },
+    { code: "42", name: "Saint-Étienne", priority: "⭐" },
+    { code: "21", name: "Dijon", priority: "⭐" },
+    { code: "63", name: "Clermont-Ferrand", priority: "⭐" },
+    { code: "37", name: "Tours", priority: "⭐" },
+    { code: "49", name: "Angers", priority: "⭐" },
+    { code: "14", name: "Caen", priority: "" },
+    { code: "51", name: "Reims", priority: "" },
+    { code: "30", name: "Nîmes", priority: "" },
+    { code: "64", name: "Pau", priority: "" },
+    { code: "74", name: "Annecy", priority: "" },
+    { code: "29", name: "Brest", priority: "" },
+    { code: "45", name: "Orléans", priority: "" },
+    { code: "68", name: "Mulhouse", priority: "" },
+    { code: "54", name: "Nancy", priority: "" },
+    { code: "56", name: "Vannes", priority: "" },
+    { code: "77", name: "Meaux", priority: "" },
+    { code: "78", name: "Versailles", priority: "" },
+    { code: "91", name: "Évry", priority: "" },
+    { code: "92", name: "Nanterre", priority: "" },
+    { code: "93", name: "Bobigny", priority: "" },
+    { code: "94", name: "Créteil", priority: "" },
+    { code: "95", name: "Cergy", priority: "" },
+    { code: "62", name: "Calais", priority: "" },
+    { code: "17", name: "La Rochelle", priority: "" },
+    { code: "84", name: "Avignon", priority: "" },
+];
+
+const list = document.getElementById("searchList");
+
+departments.forEach(dept => {
+    const query = encodeURIComponent(`location de benne ${dept.name}`);
+    const url = `https://www.google.com/maps/search/${query}`;
+    
+    const item = document.createElement("div");
+    item.className = "search-item";
+    item.innerHTML = `
+        <span class="dept">${dept.priority} ${dept.code}</span>
+        <a href="${url}" target="_blank">Location de benne — ${dept.name}</a>
+    `;
+    list.appendChild(item);
+});
+
+// Compter les lignes dans le textarea
+const textarea = document.getElementById("dataArea");
+textarea.addEventListener("input", () => {
+    const lines = textarea.value.split("\n").filter(l => l.trim().length > 0);
+    document.getElementById("counter").textContent = `📊 ${lines.length} prospects collectés`;
+});
+
+function downloadCSV() {
+    const lines = textarea.value.split("\n").filter(l => l.trim().length > 0);
+    let csv = "Entreprise,Contact,Email,Telephone,Departement,Codes Postaux,Source,Statut\n";
+    
+    lines.forEach(line => {
+        const parts = line.split("|").map(p => p.trim());
+        const entreprise = (parts[0] || "").replace(/,/g, " ");
+        const telephone = (parts[1] || "").replace(/,/g, " ");
+        const email = (parts[2] || "").replace(/,/g, " ");
+        const ville = (parts[3] || "").replace(/,/g, " ");
+        const statut = email ? "À contacter" : (telephone ? "Tel seulement" : "");
+        
+        csv += `${entreprise},,${email},${telephone},${ville},,Google Maps,${statut}\n`;
+    });
+    
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "prospects_location_benne.csv";
+    link.click();
+}
+
+function copyForSheet() {
+    const lines = textarea.value.split("\n").filter(l => l.trim().length > 0);
+    let tsv = "";
+    
+    lines.forEach(line => {
+        const parts = line.split("|").map(p => p.trim());
+        const entreprise = parts[0] || "";
+        const telephone = parts[1] || "";
+        const email = parts[2] || "";
+        const ville = parts[3] || "";
+        const statut = email ? "À contacter" : "Tel seulement";
+        
+        tsv += `${entreprise}\t\t${email}\t${telephone}\t${ville}\t\tGoogle Maps\t${statut}\n`;
+    });
+    
+    navigator.clipboard.writeText(tsv).then(() => {
+        alert("✅ Copié ! Collez directement dans Google Sheet (Ctrl+V)");
+    });
+}
+</script>
+</body>
+</html>

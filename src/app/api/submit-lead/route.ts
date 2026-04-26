@@ -247,111 +247,86 @@ export async function POST(request: NextRequest) {
             volume, type_dechet, profil, ville, message,
         });
 
-        // ── PING CASCADE ──
-        const best = await findBestCategory(code_postal, pingDescription);
-        const catId = best?.catId || "9";
-        const catName = best?.catName || "Terrassement";
-        const pingAccepted = best?.ping.accept === 1;
-        const pingRecommended = best?.ping.recommande === 1;
+        // ══════════════════════════════════════════════════════
+        // ⚠️ ViteUnDevis DÉSACTIVÉ — en observation
+        // Les leads sont collectés sur Supabase + PimpSEO uniquement
+        // Pour réactiver, passer ENABLE_VUD=true dans .env.local
+        // ══════════════════════════════════════════════════════
+        const ENABLE_VUD = process.env.ENABLE_VUD === "true";
 
-        // ── CONSTRUIRE LA DESCRIPTION DU LEAD ──
-        // (ce champ est très important selon la doc VUD)
-        const leadDescription = [
-            `Location de benne ${volume} — ${type_dechet}`,
-            `Profil: ${profil}${entreprise ? ` (${entreprise})` : ""}`,
-            `Lieu: ${ville} (${code_postal}) — ${departement}`,
-            date_livraison ? `Livraison souhaitée: ${date_livraison}` : "",
-            date_retrait ? `Retrait souhaité: ${date_retrait}` : "",
-            message ? `Précisions: ${message}` : "",
-        ]
-            .filter(Boolean)
-            .join("\n");
+        let catId = "9";
+        let catName = "Terrassement";
+        let pingAccepted = false;
+        let pingRecommended = false;
+        let isSuccess = false;
+        let devisId: string | null = null;
+        let devisHash: string | null = null;
+        let reversement: string | number | null = null;
+        let vudResponse: VudApiResponse | null = null;
+        let best: PingCandidate | null = null;
 
-        // ── CONSTRUIRE LE PAYLOAD API v1.5 ──
-        // Champs conformes à la doc VUD-API-1.5.pdf
-        const leadData: Record<string, string> = {
-            // Authentication
-            key: VUD_TOKEN,
+        if (ENABLE_VUD) {
+            // ── PING CASCADE ──
+            best = await findBestCategory(code_postal, pingDescription);
+            catId = best?.catId || "9";
+            catName = best?.catName || "Terrassement";
+            pingAccepted = best?.ping.accept === 1;
+            pingRecommended = best?.ping.recommande === 1;
 
-            // Catégorie
-            cat_id: catId,
+            // ── CONSTRUIRE LE PAYLOAD API v1.5 ──
+            const leadData: Record<string, string> = {
+                key: VUD_TOKEN,
+                cat_id: catId,
+                nom: nomFamille,
+                prenom: prenom,
+                email: email,
+                tel: telephone,
+                mobile: telephone,
+                adresse1: adresse || ville,
+                cp: code_postal,
+                ville: ville,
+                cp_projet: code_postal,
+                ville_projet: ville,
+                pays: "fr",
+                tp: profil === "professionnel" ? "2" : "1",
+                type_bien: "2",
+                delais: "1",
+                situation: profil === "professionnel" ? "4" : "1",
+                terrain: "0",
+                permis: "3",
+                description: leadDescription,
+                format_return: "json",
+                site_name: "prix-location-benne.fr",
+            };
 
-            // Identité du dépositaire
-            nom: nomFamille,
-            prenom: prenom,
-            email: email,
-            tel: telephone,         // "tel" (pas "telephone") — doc v1.5
-            mobile: telephone,      // On met le même numéro en mobile aussi
+            if (profil === "professionnel" && entreprise) {
+                leadData.societe = entreprise;
+            }
+            leadData.matin = "1";
+            leadData.midi = "1";
+            leadData.soir = "1";
+            leadData.we = "0";
 
-            // Adresse du dépositaire (obligatoire selon doc v1.5)
-            adresse1: adresse || ville,  // Fallback ville si pas d'adresse
-            cp: code_postal,
-            ville: ville,
+            // ── ENVOI DU LEAD ──
+            vudResponse = await sendLeadToVUD(leadData);
+            isSuccess = vudResponse?.code_retour?.[0]?.code?.toString() === "200";
+            devisId = vudResponse?.devis_data?.devis_id?.toString() || null;
+            devisHash = vudResponse?.devis_data?.devis_hash || null;
+            reversement = vudResponse?.devis_data?.devis_reversement || null;
 
-            // Lieu du projet (obligatoire selon doc v1.5)
-            cp_projet: code_postal,
-            ville_projet: ville,
-
-            // Pays (ISO 3166-1 alpha-2)
-            pays: "fr",
-
-            // Type de personne: 1=Particulier, 2=Pro, 3=Syndicat, 4=Autre
-            tp: profil === "professionnel" ? "2" : "1",
-
-            // Type de bien: 1=Appart, 2=Maison, 3=Immeuble, 4=Bureau
-            type_bien: "2",  // Maison par défaut (le plus courant pour location benne)
-
-            // Délais: 1=Urgent, 2=6mois, 3=1an, 4=+1an
-            delais: "1",  // Location de benne = toujours urgent
-
-            // Situation: 1=Propriétaire, 2=Locataire, 3=Admin, 4=Autre
-            situation: profil === "professionnel" ? "4" : "1",
-
-            // Terrain & Permis (pas applicable pour location benne)
-            terrain: "0",
-            permis: "3",  // 3 = Non (par défaut)
-
-            // Description (champ très important selon la doc)
-            description: leadDescription,
-
-            // Format de retour
-            format_return: "json",
-
-            // Nom du site source
-            site_name: "prix-location-benne.fr",
-        };
-
-        // Société si professionnel
-        if (profil === "professionnel" && entreprise) {
-            leadData.societe = entreprise;
+            if (!isSuccess && vudResponse?.code_retour) {
+                console.error("VUD API errors:", vudResponse.code_retour);
+            }
+        } else {
+            console.log("⏸️ ViteUnDevis désactivé — lead sauvegardé localement uniquement");
         }
 
-        // Disponibilités de contact
-        leadData.matin = "1";
-        leadData.midi = "1";
-        leadData.soir = "1";
-        leadData.we = "0";
-
-        // ── ENVOI DU LEAD ──
-        const vudResponse = await sendLeadToVUD(leadData);
-
-        // Vérifier la réponse VUD
-        const isSuccess = vudResponse?.code_retour?.[0]?.code?.toString() === "200";
-        const devisId = vudResponse?.devis_data?.devis_id?.toString() || null;
-        const devisHash = vudResponse?.devis_data?.devis_hash || null;
-        const reversement = vudResponse?.devis_data?.devis_reversement || null;
-
-        if (!isSuccess && vudResponse?.code_retour) {
-            console.error("VUD API errors:", vudResponse.code_retour);
-        }
-
-        // ── SAUVEGARDE SUPABASE + EMAIL (await before response — Vercel kills unawaited promises) ──
+        // ── SAUVEGARDE SUPABASE (toujours actif) ──
         const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "";
         const ua = request.headers.get("user-agent") || "";
 
-        // On DOIT await sinon Vercel serverless tue le process avant l'insert
         const saveResults = await Promise.allSettled([
-            // 1. Table détaillée benne_leads (données complètes du formulaire)
+            // 1. Table benne_leads (données complètes + marketplace)
             saveLeadToSupabase("benne_leads", {
                 nom: nomFamille,
                 prenom,
@@ -368,16 +343,19 @@ export async function POST(request: NextRequest) {
                 date_livraison: date_livraison || "",
                 date_retrait: date_retrait || "",
                 message: message || "",
-                vud_category: catName,
-                vud_category_id: catId,
+                vud_category: ENABLE_VUD ? catName : null,
+                vud_category_id: ENABLE_VUD ? catId : null,
                 vud_devis_id: devisId,
                 vud_devis_hash: devisHash,
                 vud_accepted: isSuccess,
-                vud_cpl: Number(best?.ping.cpl) || 0,
-                vud_ecpl: Number(best?.ping.ecpl) || 0,
+                vud_cpl: ENABLE_VUD ? (Number(best?.ping.cpl) || 0) : 0,
+                vud_ecpl: ENABLE_VUD ? (Number(best?.ping.ecpl) || 0) : 0,
                 vud_errors: isSuccess ? null : vudResponse?.code_retour || null,
                 ip_address: ip,
                 user_agent: ua,
+                // ✅ Rendre visible sur le marketplace pro
+                marketplace_visible: true,
+                is_sold: false,
             }),
             // 2. Table PimpSEO viteundevis_leads (visible dans le dashboard)
             saveLeadToSupabase("viteundevis_leads", {
@@ -386,16 +364,16 @@ export async function POST(request: NextRequest) {
                 lead_type: `Location de benne ${volume || ""}`.trim(),
                 source_site: "prix-location-benne.fr",
                 lead_date: new Date().toISOString(),
-                buyer_type: pingAccepted ? "Standard" : (pingRecommended ? "Lowcost" : null),
-                status: isSuccess ? "Attente" : "Refusé",
+                buyer_type: ENABLE_VUD ? (pingAccepted ? "Standard" : (pingRecommended ? "Lowcost" : null)) : null,
+                status: ENABLE_VUD ? (isSuccess ? "Attente" : "Refusé") : "Local",
                 refusal_reason: isSuccess ? null : vudResponse?.code_retour?.map((e) => `${e.code}: ${e.code_texte}`).join(", ") || null,
-                cpl: Number(best?.ping.cpl) || 0,
+                cpl: ENABLE_VUD ? (Number(best?.ping.cpl) || 0) : 0,
                 is_resold: false,
                 notes: `${type_dechet} — ${ville} (${code_postal}) — ${prenom} ${nomFamille} — ${telephone}`,
             }),
         ]);
 
-        // Log any save failures for debugging
+        // Log any save failures
         saveResults.forEach((r, i) => {
             if (r.status === "rejected") {
                 console.error(`Supabase save #${i} rejected:`, r.reason);
@@ -404,6 +382,7 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({
             success: true,
+            vud_enabled: ENABLE_VUD,
             vud_accepted: isSuccess,
             ping_accepted: pingAccepted,
             ping_recommended: pingRecommended,
