@@ -33,13 +33,20 @@ export default function MarketplacePage() {
   const [purchasing, setPurchasing] = useState<string | null>(null)
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null)
   const [filter, setFilter] = useState({ department: '', type: '' })
+  const [myDepartments, setMyDepartments] = useState<string[]>([])
+  const [showMyDepts, setShowMyDepts] = useState(false)
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
 
   const fetchLeads = useCallback(async () => {
     setLoading(true)
     const params = new URLSearchParams({ page: page.toString() })
-    if (filter.department) params.set('department', filter.department)
+    if (showMyDepts && myDepartments.length > 0) {
+      // Filter by all my departments
+      params.set('departments', myDepartments.join(','))
+    } else if (filter.department) {
+      params.set('department', filter.department)
+    }
     if (filter.type) params.set('type', filter.type)
 
     const res = await fetch(`/api/pro/leads?${params}`)
@@ -49,9 +56,10 @@ export default function MarketplacePage() {
       setLeads(data.leads || [])
       setCredits(data.credits || 0)
       setTotal(data.total || 0)
+      if (data.departments?.length) setMyDepartments(data.departments)
     }
     setLoading(false)
-  }, [page, filter])
+  }, [page, filter, showMyDepts, myDepartments])
 
   useEffect(() => { fetchLeads() }, [fetchLeads])
 
@@ -122,16 +130,28 @@ export default function MarketplacePage() {
 
       {/* Filtres */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        <select
-          value={filter.department}
-          onChange={e => { setFilter({ ...filter, department: e.target.value }); setPage(1) }}
-          className="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-500 w-full sm:w-auto"
+        <button
+          onClick={() => { setShowMyDepts(!showMyDepts); setFilter({ ...filter, department: '' }); setPage(1) }}
+          className={`px-4 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+            showMyDepts
+              ? 'bg-amber-500 text-slate-950'
+              : 'bg-slate-900 border border-slate-700 text-slate-300 hover:border-amber-500/50'
+          }`}
         >
-          <option value="">Tous les départements</option>
-          {Array.from({ length: 96 }, (_, i) => String(i + 1).padStart(2, '0')).map(d => (
-            <option key={d} value={d}>{d}</option>
-          ))}
-        </select>
+          📍 Mes départements {myDepartments.length > 0 && `(${myDepartments.join(', ')})`}
+        </button>
+        {!showMyDepts && (
+          <select
+            value={filter.department}
+            onChange={e => { setFilter({ ...filter, department: e.target.value }); setPage(1) }}
+            className="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-500 w-full sm:w-auto"
+          >
+            <option value="">Tous les départements</option>
+            {Array.from({ length: 96 }, (_, i) => String(i + 1).padStart(2, '0')).map(d => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+        )}
         <select
           value={filter.type}
           onChange={e => { setFilter({ ...filter, type: e.target.value }); setPage(1) }}

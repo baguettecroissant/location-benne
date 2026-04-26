@@ -55,7 +55,12 @@ function RechargerContent() {
         const data = await res.json()
         if (res.ok && data.success) {
           setCredits(data.new_balance)
-          setMessage(`✅ Paiement reçu ! ${data.credits_added} crédit${data.credits_added > 1 ? 's' : ''} ajouté${data.credits_added > 1 ? 's' : ''}.`)
+          const receipt = data.receipt
+          if (receipt) {
+            setMessage(`✅ Paiement reçu ! ${receipt.pack} — ${receipt.credits} crédit${receipt.credits > 1 ? 's' : ''} ajouté${receipt.credits > 1 ? 's' : ''} (${receipt.amount}€). Réf: ${receipt.order_id?.slice(0, 12)}...`)
+          } else {
+            setMessage(`✅ Paiement reçu ! ${data.credits_added} crédit${data.credits_added > 1 ? 's' : ''} ajouté${data.credits_added > 1 ? 's' : ''}.`)
+          }
         } else {
           setMessage(`⚠️ ${data.error || 'Erreur lors de la capture du paiement'}`)
         }

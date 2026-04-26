@@ -110,10 +110,58 @@ export async function POST(req: NextRequest) {
         .eq('id', user.id)
     }
 
+    // 📧 Envoyer le reçu par email (fire-and-forget)
+    const packLabels: Record<string, string> = { single: '1 Lead', pack5: 'Pack 5 Leads', pack10: 'Pack 10 Leads' }
+    const receiptData = {
+      order_id: order_id,
+      pack: packLabels[creditPurchase.pack_type] || creditPurchase.pack_type,
+      credits: creditPurchase.credits,
+      amount: creditPurchase.amount,
+      date: new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+      new_balance: (pro?.credits || 0) + creditPurchase.credits,
+    }
+
+    if (process.env.RESEND_API_KEY && user.email) {
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: 'Prix-Location-Benne.fr <notifications@prix-location-benne.fr>',
+          to: user.email,
+          subject: `🧾 Reçu — ${receiptData.pack} (${receiptData.amount}€)`,
+          html: `
+<div style="max-width:520px;margin:40px auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid #1e293b">
+  <div style="background:linear-gradient(135deg,#f59e0b,#ea580c);padding:24px 32px;text-align:center">
+    <h1 style="color:#0f172a;font-size:20px;margin:0">🧾 Reçu de paiement</h1>
+  </div>
+  <div style="padding:32px;color:#cbd5e1;font-size:15px;line-height:1.6">
+    <p>Merci pour votre achat !</p>
+    <div style="background:#1e293b;border-radius:12px;padding:20px;margin:20px 0">
+      <table style="width:100%;border-collapse:collapse">
+        <tr><td style="color:#64748b;padding:6px 0;font-size:13px">Pack</td><td style="color:white;font-weight:bold;text-align:right">${receiptData.pack}</td></tr>
+        <tr><td style="color:#64748b;padding:6px 0;font-size:13px">Crédits ajoutés</td><td style="color:#f59e0b;font-weight:bold;text-align:right">+${receiptData.credits}</td></tr>
+        <tr><td style="color:#64748b;padding:6px 0;font-size:13px">Montant</td><td style="color:white;font-weight:bold;text-align:right">${receiptData.amount}€</td></tr>
+        <tr style="border-top:1px solid #334155"><td style="color:#64748b;padding:6px 0;font-size:13px">Nouveau solde</td><td style="color:#22c55e;font-weight:bold;text-align:right">${receiptData.new_balance} crédits</td></tr>
+      </table>
+    </div>
+    <p style="font-size:12px;color:#64748b;text-align:center">Réf. PayPal : ${order_id}<br>Date : ${receiptData.date}</p>
+  </div>
+  <div style="border-top:1px solid #1e293b;padding:16px;text-align:center;font-size:12px;color:#475569">
+    © 2026 Prix-Location-Benne.fr — Espace Professionnel
+  </div>
+</div>`,
+        }),
+      }).catch(err => console.error('Receipt email error:', err))
+    }
+
     return NextResponse.json({
       success: true,
       credits_added: creditPurchase.credits,
       new_balance: (pro?.credits || 0) + creditPurchase.credits,
+      receipt: receiptData,
     })
   } catch (err) {
     console.error('PayPal capture error:', err)

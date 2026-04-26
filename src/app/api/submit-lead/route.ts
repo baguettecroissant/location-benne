@@ -392,6 +392,23 @@ export async function POST(request: NextRequest) {
             }
         });
 
+        // 🔔 Notifier les pros concernés (fire-and-forget)
+        const origin = request.headers.get("origin") || "https://www.prix-location-benne.fr";
+        fetch(`${origin}/api/pro/notify-new-lead`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": SUPABASE_SERVICE_KEY,
+            },
+            body: JSON.stringify({
+                lead_id: `benne-${Date.now()}`,
+                departement: departement || "",
+                ville,
+                type_dechet,
+                volume,
+            }),
+        }).catch(err => console.error("Notification error (non-blocking):", err));
+
         return NextResponse.json({
             success: true,
             vud_enabled: ENABLE_VUD,

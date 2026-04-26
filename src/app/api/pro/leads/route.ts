@@ -28,6 +28,7 @@ export async function GET(req: NextRequest) {
     // Paramètres de filtre
     const url = new URL(req.url)
     const department = url.searchParams.get('department')
+    const departments = url.searchParams.get('departments') // comma-separated
     const type = url.searchParams.get('type')
     const page = parseInt(url.searchParams.get('page') || '1')
     const limit = 20
@@ -40,7 +41,13 @@ export async function GET(req: NextRequest) {
       .order('created_at', { ascending: false })
       .range((page - 1) * limit, page * limit - 1)
 
-    if (department) {
+    if (departments) {
+      // Multi-department filter (for "Mes départements")
+      const deptList = departments.split(',').map(d => d.trim()).filter(Boolean)
+      if (deptList.length > 0) {
+        query = query.in('departement', deptList)
+      }
+    } else if (department) {
       query = query.eq('departement', department)
     }
     if (type) {
@@ -106,6 +113,7 @@ export async function GET(req: NextRequest) {
       page,
       limit,
       credits: proProfile.credits,
+      departments: proProfile.departments || [],
     })
   } catch (err) {
     console.error('Leads API error:', err)
