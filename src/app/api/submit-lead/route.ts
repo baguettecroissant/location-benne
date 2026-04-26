@@ -395,17 +395,20 @@ export async function POST(request: NextRequest) {
         // 🔔 Notifier les pros concernés — appel DIRECT Resend (pas de fire-and-forget)
         try {
             const RESEND_KEY = process.env.RESEND_API_KEY;
-            const dept = departement || "";
-            if (RESEND_KEY && dept) {
-                // Trouver les pros qui couvrent ce département
-                const prosRes = await fetch(`${SUPABASE_URL}/rest/v1/pro_profiles?is_active=eq.true&departments=cs.{${dept}}&select=id,first_name,company_name`, {
+            // Le formulaire envoie le NOM du département (ex: "Rhône") mais les pros
+            // ont des NUMÉROS (ex: "69"). On extrait le n° depuis le code postal.
+            const deptCode = code_postal ? code_postal.substring(0, 2) : "";
+            const deptLabel = departement || deptCode; // Pour l'affichage dans l'email
+            if (RESEND_KEY && deptCode) {
+                // Trouver les pros qui couvrent ce département (par numéro)
+                const prosRes = await fetch(`${SUPABASE_URL}/rest/v1/pro_profiles?is_active=eq.true&departments=cs.{${deptCode}}&select=id,first_name,company_name`, {
                     headers: {
                         "apikey": SUPABASE_SERVICE_KEY,
                         "Authorization": `Bearer ${SUPABASE_SERVICE_KEY}`,
                     },
                 });
                 const pros = prosRes.ok ? await prosRes.json() : [];
-                console.log(`[NOTIFY] Found ${pros.length} pros for dept ${dept}`);
+                console.log(`[NOTIFY] Found ${pros.length} pros for dept ${deptCode} (${deptLabel})`);
 
                 for (const pro of pros) {
                     // Récupérer l'email via Supabase Auth admin
@@ -429,7 +432,7 @@ export async function POST(request: NextRequest) {
                         body: JSON.stringify({
                             from: "Prix-Location-Benne.fr <notifications@prix-location-benne.fr>",
                             to: proEmail,
-                            subject: `🟢 Nouveau lead disponible — ${ville} (${dept})`,
+                            subject: `🟢 Nouveau lead disponible — ${ville} (${deptLabel})`,
                             html: `
 <div style="max-width:520px;margin:40px auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid #1e293b">
   <div style="background:linear-gradient(135deg,#22c55e,#16a34a);padding:24px 32px;text-align:center">
@@ -441,7 +444,7 @@ export async function POST(request: NextRequest) {
     <p>Un nouveau chantier correspondant à votre zone vient d'arriver :</p>
     <div style="background:#1e293b;border-radius:12px;padding:20px;margin:20px 0">
       <table style="width:100%;border-collapse:collapse">
-        <tr><td style="color:#64748b;padding:4px 0;font-size:13px">📍 Ville</td><td style="color:white;font-weight:bold;text-align:right">${ville} (${dept})</td></tr>
+        <tr><td style="color:#64748b;padding:4px 0;font-size:13px">📍 Ville</td><td style="color:white;font-weight:bold;text-align:right">${ville} (${deptLabel})</td></tr>
         <tr><td style="color:#64748b;padding:4px 0;font-size:13px">🗑️ Type</td><td style="color:white;text-align:right">${type_dechet || "Déchets"}</td></tr>
         <tr><td style="color:#64748b;padding:4px 0;font-size:13px">📦 Volume</td><td style="color:white;text-align:right">${volume || "Non précisé"}</td></tr>
       </table>
