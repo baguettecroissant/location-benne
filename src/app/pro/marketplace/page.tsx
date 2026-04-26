@@ -38,6 +38,8 @@ export default function MarketplacePage() {
   const [showMyDepts, setShowMyDepts] = useState(false)
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
+  const [refreshing, setRefreshing] = useState(false)
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date())
 
   const myDepsRef = useRef<string[]>([])
 
@@ -129,7 +131,25 @@ export default function MarketplacePage() {
           </h1>
           <p className="text-lg text-slate-400 mt-2">Achetez des leads exclusifs en temps réel</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Bouton Actualiser */}
+          <button
+            onClick={async () => {
+              setRefreshing(true)
+              await fetchLeads()
+              setLastRefresh(new Date())
+              setRefreshing(false)
+            }}
+            disabled={refreshing}
+            className="bg-[#0a0f1c]/80 backdrop-blur-md border border-white/10 px-4 py-4 rounded-2xl flex items-center gap-3 shadow-xl hover:bg-white/5 hover:border-white/20 transition-all group"
+            title="Actualiser les données"
+          >
+            <svg className={`w-5 h-5 text-slate-400 group-hover:text-amber-400 transition-colors ${refreshing ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span className="text-sm font-bold text-slate-400 group-hover:text-white transition-colors hidden sm:inline">Actualiser</span>
+          </button>
+          {/* Solde */}
           <div className="bg-[#0a0f1c]/80 backdrop-blur-md border border-white/10 px-6 py-4 rounded-2xl flex items-center gap-4 shadow-xl">
             <div>
               <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Votre solde</div>

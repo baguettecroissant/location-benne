@@ -32,6 +32,7 @@ export default function DashboardPage() {
   const [recentLeads, setRecentLeads] = useState<Lead[]>([])
   const [availableCount, setAvailableCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -77,12 +78,42 @@ export default function DashboardPage() {
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto w-full">
       {/* Header */}
-      <div className="mb-12 relative">
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-500/20 blur-[60px] rounded-full pointer-events-none" />
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2 relative z-10">
-          Bonjour, <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{profile.first_name || profile.company_name}</span>
-        </h1>
-        <p className="text-lg text-slate-400 relative z-10">Voici votre tableau de bord · {profile.company_name}</p>
+      <div className="mb-12 relative flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-500/20 blur-[60px] rounded-full pointer-events-none" />
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2 relative z-10">
+            Bonjour, <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{profile.first_name || profile.company_name}</span>
+          </h1>
+          <p className="text-lg text-slate-400 relative z-10">Voici votre tableau de bord · {profile.company_name}</p>
+        </div>
+        <button
+          onClick={async () => {
+            setRefreshing(true)
+            const { data: { user } } = await supabase.auth.getUser()
+            if (user) {
+              const { data: pro } = await supabase.from('pro_profiles').select('*').eq('id', user.id).single()
+              if (pro) {
+                setProfile(pro)
+                const deptParam = pro.departments?.length ? `&departments=${pro.departments.join(',')}` : ''
+                const res = await fetch(`/api/pro/leads?page=1${deptParam}`)
+                if (res.ok) {
+                  const data = await res.json()
+                  setRecentLeads(data.leads?.slice(0, 5) || [])
+                  setAvailableCount(data.total || 0)
+                }
+              }
+            }
+            setRefreshing(false)
+          }}
+          disabled={refreshing}
+          className="relative z-10 bg-[#0a0f1c]/80 backdrop-blur-md border border-white/10 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xl hover:bg-white/5 hover:border-white/20 transition-all group shrink-0"
+          title="Actualiser les données"
+        >
+          <svg className={`w-5 h-5 text-slate-400 group-hover:text-amber-400 transition-colors ${refreshing ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span className="text-sm font-bold text-slate-400 group-hover:text-white transition-colors">Actualiser</span>
+        </button>
       </div>
 
       {/* Stats cards */}
