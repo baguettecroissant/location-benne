@@ -26,7 +26,7 @@ export default function ProLayout({ children }: { children: React.ReactNode }) {
   }, [pathname])
 
   const isAuth = !!user
-  const isPublicPage = pathname === '/pro' || pathname === '/pro/inscription' || pathname === '/pro/connexion'
+  const isPublicPage = pathname === '/pro' || pathname === '/pro/inscription' || pathname === '/pro/connexion' || pathname === '/pro/confirmation'
 
   // Pages publiques (landing, inscription, connexion) : pas de sidebar
   if (isPublicPage) {

@@ -95,8 +95,8 @@ export default function InscriptionPage() {
         return
       }
 
-      // 3. Rediriger vers le dashboard
-      router.push('/pro/dashboard')
+      // 3. Rediriger vers la page de confirmation
+      router.push(`/pro/confirmation?email=${encodeURIComponent(form.email)}`)
     } catch (err) {
       setError('Erreur inattendue. Réessayez.')
       setLoading(false)
