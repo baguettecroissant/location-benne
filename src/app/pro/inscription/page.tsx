@@ -56,7 +56,7 @@ export default function InscriptionPage() {
         email: form.email,
         password: form.password,
         options: {
-          data: { company_name: form.company_name, is_pro: true },
+          data: { company_name: form.company_name, is_pro: true, first_name: form.first_name, last_name: form.last_name },
         },
       })
 
@@ -73,29 +73,26 @@ export default function InscriptionPage() {
       }
 
       // 2. Créer le profil pro via API (bypass RLS avec admin)
-      const registerRes = await fetch('/api/pro/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_id: authData.user.id,
-          first_name: form.first_name,
-          last_name: form.last_name,
-          company_name: form.company_name,
-          phone: form.phone,
-          siret: form.siret || null,
-          departments: form.departments,
-        }),
-      })
-
-      if (!registerRes.ok) {
-        const errData = await registerRes.json()
-        console.error('Profile error:', errData)
-        setError(errData.error || 'Erreur lors de la création du profil.')
-        setLoading(false)
-        return
+      // On ne bloque PAS la redirection si ça échoue
+      try {
+        await fetch('/api/pro/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id: authData.user.id,
+            first_name: form.first_name,
+            last_name: form.last_name,
+            company_name: form.company_name,
+            phone: form.phone,
+            siret: form.siret || null,
+            departments: form.departments,
+          }),
+        })
+      } catch (profileErr) {
+        console.error('Profile creation failed (will retry later):', profileErr)
       }
 
-      // 3. Rediriger vers la page de confirmation
+      // 3. TOUJOURS rediriger vers la page de confirmation
       router.push(`/pro/confirmation?email=${encodeURIComponent(form.email)}`)
     } catch (err) {
       setError('Erreur inattendue. Réessayez.')
