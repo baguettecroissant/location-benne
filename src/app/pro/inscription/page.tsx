@@ -73,8 +73,7 @@ export default function InscriptionPage() {
         return
       }
 
-      // 2. Créer le profil pro via API (bypass RLS avec admin)
-      // On ne bloque PAS la redirection si ça échoue
+      // 2. Créer le profil pro via API
       try {
         await fetch('/api/pro/register', {
           method: 'POST',
@@ -90,7 +89,7 @@ export default function InscriptionPage() {
           }),
         })
       } catch (profileErr) {
-        console.error('Profile creation failed (will retry later):', profileErr)
+        console.error('Profile creation failed:', profileErr)
       }
 
       // 3. TOUJOURS rediriger vers la page de confirmation
@@ -102,144 +101,171 @@ export default function InscriptionPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-xl">
-        <div className="text-center mb-8">
-          <Link href="/pro" className="text-4xl inline-block mb-4">🚛</Link>
-          <h1 className="text-3xl font-bold text-white">Créer votre compte Pro</h1>
-          <p className="text-slate-400 mt-2">Inscription gratuite — 1 lead offert pour tester</p>
-        </div>
+    <div className="min-h-screen bg-[#030712] text-slate-50 font-sans relative overflow-x-hidden flex flex-col py-10">
+      
+      {/* Background Effects */}
+      <div className="fixed top-[-20%] left-[-10%] w-[800px] h-[800px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="fixed bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-orange-600/5 blur-[120px] rounded-full pointer-events-none" />
 
-        <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-5">
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-xl text-sm">
-              {error}
-            </div>
-          )}
+      {/* Navigation (Minimal) */}
+      <nav className="relative z-50 px-6 pb-10 flex justify-center">
+        <Link href="/pro" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-xl shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-all duration-300">
+            🚛
+          </div>
+          <span className="font-bold text-xl tracking-tight text-white group-hover:text-amber-400 transition-colors">Espace Pro</span>
+        </Link>
+      </nav>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Prénom *</label>
-              <input
-                type="text"
-                required
-                value={form.first_name}
-                onChange={e => setForm({ ...form, first_name: e.target.value })}
-                placeholder="Jean"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Nom *</label>
-              <input
-                type="text"
-                required
-                value={form.last_name}
-                onChange={e => setForm({ ...form, last_name: e.target.value })}
-                placeholder="Dupont"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-              />
-            </div>
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center px-4 relative z-10">
+        <div className="w-full max-w-2xl">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Rejoignez le réseau</h1>
+            <p className="text-slate-400 text-lg">Créez votre compte gratuitement. Sans engagement.</p>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Nom de l&apos;entreprise *</label>
-            <input
-              type="text"
-              required
-              value={form.company_name}
-              onChange={e => setForm({ ...form, company_name: e.target.value })}
-              placeholder="Benne Express SARL"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="bg-slate-900/50 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-6 md:p-10 space-y-6 relative">
+            {/* Inner Glow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-3xl pointer-events-none" />
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Téléphone *</label>
-              <input
-                type="tel"
-                required
-                value={form.phone}
-                onChange={e => setForm({ ...form, phone: e.target.value })}
-                placeholder="06 12 34 56 78"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">SIRET (optionnel)</label>
-              <input
-                type="text"
-                value={form.siret}
-                onChange={e => setForm({ ...form, siret: e.target.value })}
-                placeholder="12345678901234"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-              />
-            </div>
-          </div>
+            {error && (
+              <div className="relative bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-2xl text-sm flex items-center gap-3">
+                <span>⚠️</span> {error}
+              </div>
+            )}
 
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Email *</label>
-            <input
-              type="email"
-              required
-              value={form.email}
-              onChange={e => setForm({ ...form, email: e.target.value })}
-              placeholder="contact@votre-entreprise.fr"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Mot de passe *</label>
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={form.password}
-              onChange={e => setForm({ ...form, password: e.target.value })}
-              placeholder="Minimum 6 caractères"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
-              Départements d&apos;intervention * <span className="text-slate-500">({form.departments.length} sélectionné{form.departments.length > 1 ? 's' : ''})</span>
-            </label>
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-3 max-h-48 overflow-y-auto">
-              <div className="flex flex-wrap gap-2">
-                {DEPARTEMENTS.map(d => (
-                  <button
-                    key={d}
-                    type="button"
-                    onClick={() => toggleDept(d)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                      form.departments.includes(d)
-                        ? 'bg-amber-500 text-slate-950'
-                        : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
-                    }`}
-                  >
-                    {d}
-                  </button>
-                ))}
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Prénom *</label>
+                <input
+                  type="text"
+                  required
+                  value={form.first_name}
+                  onChange={e => setForm({ ...form, first_name: e.target.value })}
+                  placeholder="Jean"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Nom *</label>
+                <input
+                  type="text"
+                  required
+                  value={form.last_name}
+                  onChange={e => setForm({ ...form, last_name: e.target.value })}
+                  placeholder="Dupont"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
               </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 py-4 rounded-xl font-bold text-lg hover:from-amber-400 hover:to-orange-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? 'Création en cours...' : 'Créer mon compte Pro →'}
-          </button>
+            <div className="relative z-10">
+              <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Nom de l'entreprise *</label>
+              <input
+                type="text"
+                required
+                value={form.company_name}
+                onChange={e => setForm({ ...form, company_name: e.target.value })}
+                placeholder="Benne Express SARL"
+                className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+              />
+            </div>
 
-          <p className="text-center text-sm text-slate-500">
-            Déjà inscrit ?{' '}
-            <Link href="/pro/connexion" className="text-amber-400 hover:underline">Se connecter</Link>
-          </p>
-        </form>
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Téléphone *</label>
+                <input
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={e => setForm({ ...form, phone: e.target.value })}
+                  placeholder="06 12 34 56 78"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">SIRET <span className="text-slate-500 font-normal">(optionnel)</span></label>
+                <input
+                  type="text"
+                  value={form.siret}
+                  onChange={e => setForm({ ...form, siret: e.target.value })}
+                  placeholder="12345678901234"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
+              </div>
+            </div>
+
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Email *</label>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={e => setForm({ ...form, email: e.target.value })}
+                  placeholder="contact@votre-entreprise.fr"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">Mot de passe *</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={form.password}
+                  onChange={e => setForm({ ...form, password: e.target.value })}
+                  placeholder="Minimum 6 caractères"
+                  className="w-full bg-[#0a0f1c] border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all shadow-inner"
+                />
+              </div>
+            </div>
+
+            <div className="relative z-10 pt-2">
+              <label className="block text-sm font-medium text-slate-300 mb-2 ml-1">
+                Départements d'intervention * <span className="text-amber-500 font-bold ml-1">{form.departments.length > 0 && `(${form.departments.length})`}</span>
+              </label>
+              <div className="bg-[#0a0f1c] border border-white/10 rounded-2xl p-4 max-h-56 overflow-y-auto shadow-inner">
+                <div className="flex flex-wrap gap-2">
+                  {DEPARTEMENTS.map(d => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => toggleDept(d)}
+                      className={`px-3.5 py-2 rounded-xl text-sm font-bold transition-all border ${
+                        form.departments.includes(d)
+                          ? 'bg-amber-500 border-amber-400 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                          : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      {d}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-10 pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 py-4 rounded-2xl font-bold text-lg hover:from-amber-400 hover:to-orange-500 transition-all disabled:opacity-50 transform hover:scale-[1.02] shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+              >
+                {loading ? 'Création en cours...' : 'Créer mon compte Pro →'}
+              </button>
+            </div>
+
+            <div className="relative z-10 pt-4 text-center">
+              <p className="text-sm text-slate-500">
+                Vous avez déjà un compte ?{' '}
+                <Link href="/pro/connexion" className="text-amber-400 hover:text-amber-300 font-medium hover:underline transition-colors">
+                  Connectez-vous
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
