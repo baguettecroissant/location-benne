@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -38,12 +38,13 @@ export default function MarketplacePage() {
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
 
+  const myDepsRef = useRef<string[]>([])
+
   const fetchLeads = useCallback(async () => {
     setLoading(true)
     const params = new URLSearchParams({ page: page.toString() })
-    if (showMyDepts && myDepartments.length > 0) {
-      // Filter by all my departments
-      params.set('departments', myDepartments.join(','))
+    if (showMyDepts && myDepsRef.current.length > 0) {
+      params.set('departments', myDepsRef.current.join(','))
     } else if (filter.department) {
       params.set('department', filter.department)
     }
@@ -56,10 +57,13 @@ export default function MarketplacePage() {
       setLeads(data.leads || [])
       setCredits(data.credits || 0)
       setTotal(data.total || 0)
-      if (data.departments?.length) setMyDepartments(data.departments)
+      if (data.departments?.length && myDepsRef.current.length === 0) {
+        myDepsRef.current = data.departments
+        setMyDepartments(data.departments)
+      }
     }
     setLoading(false)
-  }, [page, filter, showMyDepts, myDepartments])
+  }, [page, filter, showMyDepts])
 
   useEffect(() => { fetchLeads() }, [fetchLeads])
 
