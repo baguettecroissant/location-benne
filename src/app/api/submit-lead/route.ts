@@ -392,22 +392,79 @@ export async function POST(request: NextRequest) {
             }
         });
 
-        // 🔔 Notifier les pros concernés (fire-and-forget)
-        const origin = request.headers.get("origin") || "https://www.prix-location-benne.fr";
-        fetch(`${origin}/api/pro/notify-new-lead`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": SUPABASE_SERVICE_KEY,
-            },
-            body: JSON.stringify({
-                lead_id: `benne-${Date.now()}`,
-                departement: departement || "",
-                ville,
-                type_dechet,
-                volume,
-            }),
-        }).catch(err => console.error("Notification error (non-blocking):", err));
+        // 🔔 Notifier les pros concernés — appel DIRECT Resend (pas de fire-and-forget)
+        try {
+            const RESEND_KEY = process.env.RESEND_API_KEY;
+            const dept = departement || "";
+            if (RESEND_KEY && dept) {
+                // Trouver les pros qui couvrent ce département
+                const prosRes = await fetch(`${SUPABASE_URL}/rest/v1/pro_profiles?is_active=eq.true&departments=cs.{${dept}}&select=id,first_name,company_name`, {
+                    headers: {
+                        "apikey": SUPABASE_SERVICE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_SERVICE_KEY}`,
+                    },
+                });
+                const pros = prosRes.ok ? await prosRes.json() : [];
+                console.log(`[NOTIFY] Found ${pros.length} pros for dept ${dept}`);
+
+                for (const pro of pros) {
+                    // Récupérer l'email via Supabase Auth admin
+                    const authRes = await fetch(`${SUPABASE_URL}/auth/v1/admin/users/${pro.id}`, {
+                        headers: {
+                            "apikey": SUPABASE_SERVICE_KEY,
+                            "Authorization": `Bearer ${SUPABASE_SERVICE_KEY}`,
+                        },
+                    });
+                    const authData = authRes.ok ? await authRes.json() : null;
+                    const proEmail = authData?.email;
+                    if (!proEmail) continue;
+
+                    const proName = pro.first_name || pro.company_name || "Professionnel";
+                    const emailRes = await fetch("https://api.resend.com/emails", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${RESEND_KEY}`,
+                        },
+                        body: JSON.stringify({
+                            from: "Prix-Location-Benne.fr <notifications@prix-location-benne.fr>",
+                            to: proEmail,
+                            subject: `🟢 Nouveau lead disponible — ${ville} (${dept})`,
+                            html: `
+<div style="max-width:520px;margin:40px auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid #1e293b">
+  <div style="background:linear-gradient(135deg,#22c55e,#16a34a);padding:24px 32px;text-align:center">
+    <div style="font-size:32px;margin-bottom:4px">🟢</div>
+    <h1 style="color:white;font-size:20px;margin:0">Nouveau lead disponible !</h1>
+  </div>
+  <div style="padding:32px;color:#cbd5e1;font-size:15px;line-height:1.6">
+    <p>Bonjour <strong style="color:white">${proName}</strong>,</p>
+    <p>Un nouveau chantier correspondant à votre zone vient d'arriver :</p>
+    <div style="background:#1e293b;border-radius:12px;padding:20px;margin:20px 0">
+      <table style="width:100%;border-collapse:collapse">
+        <tr><td style="color:#64748b;padding:4px 0;font-size:13px">📍 Ville</td><td style="color:white;font-weight:bold;text-align:right">${ville} (${dept})</td></tr>
+        <tr><td style="color:#64748b;padding:4px 0;font-size:13px">🗑️ Type</td><td style="color:white;text-align:right">${type_dechet || "Déchets"}</td></tr>
+        <tr><td style="color:#64748b;padding:4px 0;font-size:13px">📦 Volume</td><td style="color:white;text-align:right">${volume || "Non précisé"}</td></tr>
+      </table>
+    </div>
+    <div style="text-align:center;margin:24px 0">
+      <a href="https://www.prix-location-benne.fr/pro/marketplace" style="display:inline-block;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#0f172a;padding:14px 32px;border-radius:12px;font-weight:bold;font-size:16px;text-decoration:none">🏪 Voir sur le Marketplace →</a>
+    </div>
+    <p style="font-size:13px;color:#64748b;text-align:center">Soyez le premier à saisir cette opportunité !</p>
+  </div>
+  <div style="border-top:1px solid #1e293b;padding:16px;text-align:center;font-size:12px;color:#475569">
+    © 2026 Prix-Location-Benne.fr — Espace Professionnel
+  </div>
+</div>`,
+                        }),
+                    });
+                    console.log(`[NOTIFY] Email to ${proEmail}: ${emailRes.status} ${emailRes.statusText}`);
+                }
+            } else {
+                console.log("[NOTIFY] Skipped — no RESEND_API_KEY or no department");
+            }
+        } catch (notifyErr) {
+            console.error("[NOTIFY] Error (non-blocking):", notifyErr);
+        }
 
         return NextResponse.json({
             success: true,
